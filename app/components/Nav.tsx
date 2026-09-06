@@ -108,7 +108,7 @@ export default function Nav() {
         <Link href="/" className="flex items-center gap-2.5 group">
           <Image
             src="/logo-new.png"
-            alt="1/75th RGR Logo"
+            alt="20th Special Forces Group Logo"
             width={36}
             height={36}
             className="shrink-0 drop-shadow-lg"
@@ -116,9 +116,9 @@ export default function Nav() {
           />
           <div className="flex flex-col leading-none">
             <span className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>
-              1/75<span style={{ color: "#4db6e0" }}>th</span> RGR
+              20<span style={{ color: "#4db6e0" }}>th</span> SFG
             </span>
-            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8892a4" }}>Outlaws · Bellum</span>
+            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8892a4" }}>ODA 2011 · Bellum</span>
           </div>
         </Link>
 
