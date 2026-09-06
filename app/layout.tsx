@@ -10,9 +10,9 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "1st Platoon, Alpha Company, 1/75th Ranger Regiment | Bellum Unit",
+  title: "20th Special Forces Group | Bellum Unit",
   description:
-    "Rangers Lead the Way. The Outlaws — 1st Platoon, Alpha Company, 1st Battalion, 75th Ranger Regiment — are a milsim community for the game Bellum.",
+    "20th Special Forces Group milsim community featuring ODA and special operations aviation structure.",
 };
 
 async function AdminBar() {
@@ -51,18 +51,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     border: "2px solid rgba(77,182,224,0.35)",
                     background: "radial-gradient(circle, #0c0f17, #07090e)",
                   }}>
-                    <span className="text-xs font-black" style={{ color: "#4db6e0" }}>75</span>
+                    <span className="text-xs font-black" style={{ color: "#4db6e0" }}>20</span>
                   </div>
                   <div>
-                    <p className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>1/75th RGR — Outlaws</p>
-                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#8892a4" }}>Bellum Unit · Alpha Company</p>
+                    <p className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>20th Special Forces Group</p>
+                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#8892a4" }}>Bellum Unit · ODA 2011</p>
                   </div>
                 </div>
                 <p className="text-xs leading-relaxed max-w-xs" style={{ color: "#8892a4" }}>
-                  A milsim realism unit dedicated to high-fidelity Ranger operations in Bellum, modeled after the real-world 1st Battalion, 75th Ranger Regiment.
+                  A milsim unit organized around an Operational Detachment Alpha and supporting special operations aviation crew.
                 </p>
                 <p className="text-xs font-bold tracking-widest uppercase mt-3 italic" style={{ color: "#4db6e0" }}>
-                  &quot;Rangers Lead the Way&quot;
+                  &quot;De Oppresso Liber&quot;
                 </p>
               </div>
               <div>
@@ -83,7 +83,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <ul className="space-y-2 text-xs" style={{ color: "#505870" }}>
                   <li>Game: <span style={{ color: "#8892a4" }}>Bellum</span></li>
                   <li>Type: <span style={{ color: "#8892a4" }}>Milsim Realism</span></li>
-                  <li>Modeled: <span style={{ color: "#8892a4" }}>1/75th RGR</span></li>
+                  <li>Modeled: <span style={{ color: "#8892a4" }}>20th SFG</span></li>
                   <li>Region: <span style={{ color: "#8892a4" }}>Fort Moore, GA</span></li>
                   <li>Ops: <span style={{ color: "#8892a4" }}>Fri / Sat</span></li>
                 </ul>
@@ -92,7 +92,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-3"
               style={{ borderTop: "1px solid #161b27" }}>
               <p className="text-xs" style={{ color: "#505870" }}>
-                © 2026 1st Plt, A Co, 1/75th RGR — Outlaws. Not affiliated with the U.S. Army.
+                © 2026 20th Special Forces Group community. Not affiliated with the U.S. Army.
               </p>
               <p className="text-xs" style={{ color: "#505870" }}>
                 Fictional gaming community for entertainment purposes only.
