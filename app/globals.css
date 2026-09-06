@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ── BLUE ACCENT COLOR SYSTEM ── */
+:root {
+  --background:     #07090e;
+  --foreground:     #e8edf5;
+  --card:           #0c0f17;
+  --border:         #161b27;
+  --muted:          #8892a4;
+  --accent:         #4db6e0;
+  --accent-dim:     rgba(77,182,224,0.08);
+  --accent-border:  rgba(77,182,224,0.18);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* ═══════════════════════════════
+   BLACK MULTICAM PATTERN
+   Very dark near-black base
+   with subtle organic dark blobs
+═══════════════════════════════ */
+.bg-black-mc {
+  background-color: #07090e;
+  background-image:
+    radial-gradient(ellipse 22% 13% at  8% 12%, #0d1018 0%, transparent 100%),
+    radial-gradient(ellipse 14% 20% at 26%  4%, #090c12 0%, transparent 100%),
+    radial-gradient(ellipse 20% 11% at 47% 24%, #141820 0%, transparent 100%),
+    radial-gradient(ellipse 24% 17% at 68%  9%, #0b0e15 0%, transparent 100%),
+    radial-gradient(ellipse 18% 22% at 87% 19%, #11151d 0%, transparent 100%),
+    radial-gradient(ellipse 13% 16% at 14% 43%, #0a0d14 0%, transparent 100%),
+    radial-gradient(ellipse 26% 13% at 39% 54%, #151921 0%, transparent 100%),
+    radial-gradient(ellipse 19% 17% at 61% 41%, #0e1119 0%, transparent 100%),
+    radial-gradient(ellipse 22% 19% at 83% 52%, #13171f 0%, transparent 100%),
+    radial-gradient(ellipse 17% 25% at  4% 71%, #090c13 0%, transparent 100%),
+    radial-gradient(ellipse 23% 15% at 30% 74%, #10141c 0%, transparent 100%),
+    radial-gradient(ellipse 19% 21% at 57% 81%, #0c0f16 0%, transparent 100%),
+    radial-gradient(ellipse 21% 17% at 77% 70%, #14181e 0%, transparent 100%),
+    radial-gradient(ellipse 17% 23% at 93% 87%, #0f1319 0%, transparent 100%),
+    radial-gradient(ellipse 12% 14% at 45%  5%, #161a22 0%, transparent 100%),
+    radial-gradient(ellipse 18% 12% at 72% 32%, #0b0e15 0%, transparent 100%);
+}
+
+/* ═══════════════════════════════
+   MULTICAM PATTERN
+   Dark base with subtle blue-dark
+   organic blob shapes
+═══════════════════════════════ */
+.bg-mc {
+  background-color: #0c0f17;
+  background-image:
+    radial-gradient(ellipse 22% 13% at  8% 12%, rgba(77,182,224,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 16% 20% at 27%  5%, rgba(10,16,30,0.90) 0%, transparent 100%),
+    radial-gradient(ellipse 20% 11% at 47% 23%, rgba(100,160,200,0.05) 0%, transparent 100%),
+    radial-gradient(ellipse 24% 16% at 68% 10%, rgba(12,18,34,0.88) 0%, transparent 100%),
+    radial-gradient(ellipse 17% 21% at 88% 18%, rgba(60,130,180,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 13% 15% at 14% 42%, rgba(30,60,100,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 25% 12% at 39% 53%, rgba(8,14,28,0.88) 0%, transparent 100%),
+    radial-gradient(ellipse 19% 16% at 61% 40%, rgba(80,150,210,0.05) 0%, transparent 100%),
+    radial-gradient(ellipse 21% 15% at 82% 46%, rgba(14,20,38,0.82) 0%, transparent 100%),
+    radial-gradient(ellipse 15% 22% at  9% 68%, rgba(50,120,170,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 23% 13% at 31% 73%, rgba(6,10,22,0.90) 0%, transparent 100%),
+    radial-gradient(ellipse 18% 19% at 58% 79%, rgba(77,182,224,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 22% 16% at 78% 67%, rgba(12,18,36,0.82) 0%, transparent 100%),
+    radial-gradient(ellipse 17% 21% at 93% 80%, rgba(40,100,150,0.06) 0%, transparent 100%);
+}
+
+/* ── GRAIN OVERLAY ── */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ── ACCENT DIVIDER LINE ── */
+.accent-line {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(77,182,224,0.25) 15%,
+    #4db6e0 50%,
+    rgba(77,182,224,0.25) 85%,
+    transparent 100%
+  );
+}
+
+/* ── LEGACY GOLD LINE (kept for compatibility) ── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(77,182,224,0.25) 15%,
+    #4db6e0 50%,
+    rgba(77,182,224,0.25) 85%,
+    transparent 100%
+  );
+}
+
+/* ── MC DIVIDER LINE ── */
+.mc-line {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #161b27 10%,
+    rgba(77,182,224,0.4) 30%,
+    #4db6e0 50%,
+    rgba(77,182,224,0.4) 70%,
+    #161b27 90%,
+    transparent 100%
+  );
+}
+
+/* ── STENCIL NUMBER STYLE ── */
+.stencil {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: rgba(77,182,224,0.06);
+  font-size: 7rem;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── CARD BORDER ── */
+.mc-card {
+  border-left: 2px solid #4db6e0;
+  background-color: #0c0f17;
+  border-top: 1px solid #161b27;
+  border-right: 1px solid #161b27;
+  border-bottom: 1px solid #161b27;
+}
+
+.mc-card-olive {
+  border-left: 2px solid rgba(77,182,224,0.35);
+  background-color: #0c0f17;
+  border-top: 1px solid #161b27;
+  border-right: 1px solid #161b27;
+  border-bottom: 1px solid #161b27;
+}

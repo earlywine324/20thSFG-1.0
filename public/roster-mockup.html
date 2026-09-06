@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Roster — Mockup v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:       #07090c;
+  --surface:  #0d1117;
+  --surface2: #161b22;
+  --border:   #21262d;
+  --border2:  #30363d;
+  --text:     #e6edf3;
+  --muted:    #8b949e;
+  --dim:      #484f58;
+  --gold:     #d29922;
+  --gold-glow:rgba(210,153,34,.18);
+  --green:    #3fb950;
+  --green-dim:rgba(63,185,80,.12);
+  --blue:     #58a6ff;
+  --blue-dim: rgba(88,166,255,.1);
+  --amber:    #f0883e;
+  --amber-dim:rgba(240,136,62,.1);
+  --teal:     #39d0d8;
+  --teal-dim: rgba(57,208,216,.1);
+  --red:      #f85149;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ═══ UTILITY ═══ */
+.mono{font-family:var(--mono)}
+.uppercase{text-transform:uppercase;letter-spacing:.08em}
+
+/* ═══ HEADER ═══ */
+.header{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:32px 40px 0;
+}
+.header-top{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:24px;
+  margin-bottom:28px;
+}
+.unit-id{display:flex;align-items:center;gap:16px}
+.unit-crest{
+  width:52px;height:52px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold-glow),rgba(210,153,34,.05));
+  border:1px solid rgba(210,153,34,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;font-weight:700;color:var(--gold);
+  letter-spacing:.15em;
+  flex-shrink:0;
+}
+.unit-meta h1{font-size:22px;font-weight:800;color:var(--text);line-height:1.1;margin-bottom:4px}
+.unit-meta p{font-size:12px;color:var(--muted)}
+.unit-meta .callout{
+  display:inline-block;margin-top:6px;
+  font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);padding:2px 8px;border-radius:4px;
+  background:var(--gold-glow);border:1px solid rgba(210,153,34,.25);
+}
+
+/* Stat pills */
+.stat-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0}
+.stat-pill{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+  padding:10px 16px;
+}
+.stat-pill .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.stat-pill .val{font-size:20px;font-weight:800;line-height:1}
+.stat-pill .lbl{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.stat-pill.strength{flex-direction:column;align-items:flex-start;min-width:160px}
+.fill-track{width:100%;height:3px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+.fill-bar{height:100%;border-radius:2px;transition:width .4s}
+
+/* ═══ TAB BAR ═══ */
+.tabs{
+  display:flex;gap:0;margin-top:20px;
+  border-top:1px solid var(--border);
+}
+.tab{
+  display:flex;align-items:center;gap:7px;
+  padding:13px 20px;font-size:12px;font-weight:600;letter-spacing:.04em;
+  color:var(--muted);cursor:pointer;text-decoration:none;
+  border-top:2px solid transparent;margin-top:-1px;
+  transition:color .15s;white-space:nowrap;
+}
+.tab.active{color:var(--text);border-top-color:var(--gold)}
+.tab svg{width:13px;height:13px;opacity:.7}
+.tab .badge{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--muted);padding:1px 6px;border-radius:10px;
+}
+
+/* ═══ MAIN CONTENT ═══ */
+.main{max-width:1280px;margin:0 auto;padding:32px 40px 80px}
+
+/* ═══ CMD CHAIN ═══ */
+.cmd-section{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:20px 24px;margin-bottom:32px;overflow:hidden;
+}
+.cmd-label{
+  font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:18px;
+  display:flex;align-items:center;gap:8px;
+}
+.cmd-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.cmd-row{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:4px}
+
+.cmd-node{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;width:88px}
+.cmd-line{flex:1;height:1px;background:var(--border);align-self:flex-start;margin-top:22px;min-width:16px;flex-shrink:0}
+
+.cmd-ring{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  position:relative;
+}
+.cmd-ring::before{
+  content:'';position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(var(--ring-color) calc(var(--pct,100%) * 1%),var(--border) 0);
+  z-index:-1;
+}
+.cmd-ring::after{content:'';position:absolute;inset:2px;border-radius:50%;background:var(--surface)}
+.cmd-ring span{position:relative;z-index:1}
+.cmd-ring.vacant{opacity:.4}
+.cmd-rank-lbl{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--gold)}
+.cmd-rank-lbl.vacant{color:var(--dim)}
+.cmd-name-lbl{font-size:10px;font-weight:600;color:var(--text);text-align:center;line-height:1.2;max-width:80px}
+.cmd-name-lbl.vacant{color:var(--dim)}
+.cmd-role-lbl{font-size:8px;font-weight:500;color:var(--muted);text-align:center;line-height:1.3;max-width:80px;text-transform:uppercase;letter-spacing:.05em}
+
+/* ═══ SECTION HEADER ═══ */
+.section{margin-bottom:40px}
+.section-hdr{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border-radius:8px;
+  margin-bottom:16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+}
+.echelon-badge{
+  font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;padding:3px 8px;border-radius:4px;flex-shrink:0;
+  display:flex;align-items:center;gap:5px;
+}
+.section-title{font-size:14px;font-weight:700;color:var(--text);flex:1}
+.section-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.section-strength{
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.strength-fraction{
+  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--muted);
+}
+.strength-fraction span{color:var(--text)}
+.mini-fill{width:64px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.mini-fill div{height:100%;border-radius:2px}
+
+/* ═══ ELEM HEADER ═══ */
+.elem-hdr{
+  display:flex;align-items:center;gap:10px;
+  margin:20px 0 12px;
+}
+.elem-hdr .elem-label{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;white-space:nowrap;
+}
+.elem-hdr .elem-line{flex:1;height:1px;background:var(--border)}
+.elem-hdr .elem-count{
+  font-family:var(--mono);font-size:9px;color:var(--dim);white-space:nowrap;
+}
+
+/* ═══ ROSTER TABLE ═══ */
+.roster-table{
+  width:100%;border-collapse:collapse;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+}
+.roster-table thead tr{background:var(--surface2);border-bottom:1px solid var(--border)}
+.roster-table th{
+  padding:9px 14px;text-align:left;
+  font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);white-space:nowrap;
+}
+.roster-table tbody tr{
+  border-bottom:1px solid var(--border);
+  transition:background .1s;cursor:pointer;
+}
+.roster-table tbody tr:last-child{border-bottom:none}
+.roster-table tbody tr:hover{background:rgba(88,166,255,.04)}
+.roster-table tbody tr.vacant{cursor:default}
+.roster-table tbody tr.vacant:hover{background:transparent}
+.roster-table td{padding:11px 14px;vertical-align:middle}
+
+/* Rank cell */
+.cell-rank{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.rank-box{
+  width:36px;height:36px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9px;font-weight:800;
+  flex-shrink:0;
+}
+.rank-abbr{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--gold)}
+.rank-abbr.vacant{color:var(--dim)}
+
+/* Name cell */
+.cell-name .name{font-size:13px;font-weight:700;color:var(--text)}
+.cell-name .callsign{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:1px}
+.cell-name.vacant .name{color:var(--dim);font-style:italic}
+
+/* Role / MOS */
+.cell-role .role{font-size:12px;font-weight:600;color:var(--text)}
+.cell-role .mos{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:1px}
+.cell-role.vacant .role{color:var(--dim)}
+
+/* Quals */
+.cell-quals{display:flex;gap:4px;flex-wrap:wrap}
+.qual{
+  font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:2px 6px;border-radius:3px;
+  color:var(--blue);background:var(--blue-dim);border:1px solid rgba(88,166,255,.18);
+}
+
+/* Status */
+.status{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 8px;border-radius:20px;white-space:nowrap;
+}
+.status .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.status.active{color:var(--green);background:var(--green-dim)}
+.status.active .dot{background:var(--green);box-shadow:0 0 4px var(--green)}
+.status.vacant{color:var(--dim);background:rgba(72,79,88,.08)}
+.status.vacant .dot{background:var(--dim)}
+.status.rasp{color:var(--amber);background:var(--amber-dim)}
+.status.rasp .dot{background:var(--amber);box-shadow:0 0 4px var(--amber)}
+
+/* Nesting */
+.nest{padding-left:20px;border-left:2px solid var(--border);margin-top:0}
+
+/* ═══ RASP CARDS ═══ */
+.rasp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.rasp-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:14px;display:flex;flex-direction:column;gap:8px;
+  position:relative;overflow:hidden;
+}
+.rasp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),transparent);
+}
+.rasp-card-rank{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.12em}
+.rasp-card-name{font-size:13px;font-weight:700;color:var(--text)}
+.rasp-card-callsign{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.rasp-card-role{font-size:11px;color:var(--amber);font-weight:600;margin-top:2px}
+.rasp-card-mos{font-family:var(--mono);font-size:9px;color:var(--dim)}
+
+/* ═══ WALL OF HONOR ═══ */
+.honor-empty{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:48px;text-align:center;
+}
+.honor-empty p{font-size:12px;color:var(--dim);font-style:italic}
+
+/* ═══ SECTION DIVIDER ═══ */
+.divider{
+  display:flex;align-items:center;gap:16px;
+  margin:48px 0 32px;
+  font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <div class="header-top">
+    <div class="unit-id">
+      <div class="unit-crest">1/75<br>RGR</div>
+      <div class="unit-meta">
+        <h1>Unit Roster</h1>
+        <p>1st Platoon · Alpha Company · 1st Battalion, 75th Ranger Regiment</p>
+        <span class="callout">Outlaws · Rangers Lead the Way</span>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-pill">
+        <div class="dot" style="background:#8b949e"></div>
+        <div><div class="val">34</div><div class="lbl">Total Billets</div></div>
+      </div>
+      <div class="stat-pill">
+        <div class="dot" style="background:var(--green);box-shadow:0 0 6px var(--green)"></div>
+        <div><div class="val" style="color:var(--green)">18</div><div class="lbl">Present for Duty</div></div>
+      </div>
+      <div class="stat-pill">
+        <div class="dot" style="background:var(--gold)"></div>
+        <div><div class="val" style="color:var(--gold)">16</div><div class="lbl">Vacant Billets</div></div>
+      </div>
+      <div class="stat-pill">
+        <div class="dot" style="background:var(--amber)"></div>
+        <div><div class="val" style="color:var(--amber)">4</div><div class="lbl">In RASP</div></div>
+      </div>
+      <div class="stat-pill strength">
+        <div style="display:flex;align-items:baseline;gap:6px;width:100%">
+          <div class="val" style="color:var(--blue)">53%</div>
+          <div class="lbl">Strength</div>
+        </div>
+        <div class="fill-track" style="width:100%">
+          <div class="fill-bar" style="width:53%;background:var(--blue)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <a class="tab active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Unit Roster
+      <span class="badge">34</span>
+    </a>
+    <a class="tab" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Administrative
+      <span class="badge">12</span>
+    </a>
+  </div>
+</div>
+
+<!-- ══════════ CONTENT ══════════ -->
+<div class="main">
+
+  <!-- ── CHAIN OF COMMAND ── -->
+  <div class="cmd-section">
+    <div class="cmd-label">Chain of Command</div>
+    <div class="cmd-row">
+
+      <div class="cmd-node">
+        <div class="cmd-ring vacant" style="--ring-color:var(--dim);background:var(--surface2);color:var(--dim)"><span>CO</span></div>
+        <div class="cmd-rank-lbl vacant mono">CPT</div>
+        <div class="cmd-name-lbl vacant">Vacant</div>
+        <div class="cmd-role-lbl">Cdr</div>
+      </div>
+      <div class="cmd-line"></div>
+
+      <div class="cmd-node">
+        <div class="cmd-ring vacant" style="--ring-color:var(--dim);background:var(--surface2);color:var(--dim)"><span>1SG</span></div>
+        <div class="cmd-rank-lbl vacant mono">1SG</div>
+        <div class="cmd-name-lbl vacant">Vacant</div>
+        <div class="cmd-role-lbl">First Sgt</div>
+      </div>
+      <div class="cmd-line"></div>
+
+      <div class="cmd-node">
+        <div class="cmd-ring" style="--ring-color:var(--gold);background:var(--surface2);color:var(--gold)"><span>PLT</span></div>
+        <div class="cmd-rank-lbl mono">2LT</div>
+        <div class="cmd-name-lbl">D.Anderson</div>
+        <div class="cmd-role-lbl">Plt Leader</div>
+      </div>
+      <div class="cmd-line"></div>
+
+      <div class="cmd-node">
+        <div class="cmd-ring vacant" style="--ring-color:var(--dim);background:var(--surface2);color:var(--dim)"><span>PSG</span></div>
+        <div class="cmd-rank-lbl vacant mono">SFC</div>
+        <div class="cmd-name-lbl vacant">Vacant</div>
+        <div class="cmd-role-lbl">Plt Sgt</div>
+      </div>
+      <div class="cmd-line"></div>
+
+      <div class="cmd-node">
+        <div class="cmd-ring" style="--ring-color:var(--teal);background:var(--surface2);color:var(--teal)"><span>SL1</span></div>
+        <div class="cmd-rank-lbl mono" style="color:var(--teal)">SSG</div>
+        <div class="cmd-name-lbl">Croney</div>
+        <div class="cmd-role-lbl">1st SL</div>
+      </div>
+      <div class="cmd-line"></div>
+
+      <div class="cmd-node">
+        <div class="cmd-ring vacant" style="--ring-color:var(--dim);background:var(--surface2);color:var(--dim)"><span>SL2</span></div>
+        <div class="cmd-rank-lbl vacant mono">SSG</div>
+        <div class="cmd-name-lbl vacant">Vacant</div>
+        <div class="cmd-role-lbl">2nd SL</div>
+      </div>
+      <div class="cmd-line"></div>
+
+      <div class="cmd-node">
+        <div class="cmd-ring vacant" style="--ring-color:var(--dim);background:var(--surface2);color:var(--dim)"><span>WSL</span></div>
+        <div class="cmd-rank-lbl vacant mono">SSG</div>
+        <div class="cmd-name-lbl vacant">Vacant</div>
+        <div class="cmd-role-lbl">Wpns SL</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── BATTALION → COMPANY → PLATOON ── -->
+
+  <!-- Battalion header -->
+  <div class="section-hdr">
+    <span class="echelon-badge" style="color:var(--gold);background:var(--gold-glow);border:1px solid rgba(210,153,34,.2)">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      BN
+    </span>
+    <div>
+      <div class="section-title">1st Battalion, 75th Ranger Regiment</div>
+      <div class="section-sub">Fort Moore, GA · 1/75th RGR</div>
+    </div>
+    <div class="section-strength">
+      <div class="strength-fraction mono"><span>0</span> / 2</div>
+      <div class="mini-fill"><div style="width:0%;background:var(--gold)"></div></div>
+    </div>
+  </div>
+
+  <table class="roster-table">
+    <thead><tr>
+      <th>Rank</th><th>Name</th><th>Role / Position</th><th>MOS</th><th>Quals</th><th>Status</th>
+    </tr></thead>
+    <tbody>
+      <tr class="vacant">
+        <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">LTC</span></div></div></td>
+        <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+        <td><div class="cell-role vacant"><div class="role">Battalion Commander</div></div></td>
+        <td class="mono" style="font-size:10px;color:var(--dim)">11A</td>
+        <td></td>
+        <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+      </tr>
+      <tr class="vacant">
+        <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">CSM</span></div></div></td>
+        <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+        <td><div class="cell-role vacant"><div class="role">Command Sergeant Major</div></div></td>
+        <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+        <td></td>
+        <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Company nest -->
+  <div class="nest" style="border-color:rgba(210,153,34,.2);margin-top:24px">
+
+    <div class="section-hdr" style="margin-left:-20px">
+      <span class="echelon-badge" style="color:var(--gold);background:rgba(210,153,34,.08);border:1px solid rgba(210,153,34,.15)">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        CO
+      </span>
+      <div>
+        <div class="section-title">Alpha Company</div>
+        <div class="section-sub">A Co · 1/75th RGR · Outlaws</div>
+      </div>
+      <div class="section-strength">
+        <div class="strength-fraction mono"><span>8</span> / 28</div>
+        <div class="mini-fill"><div style="width:29%;background:var(--gold)"></div></div>
+      </div>
+    </div>
+
+    <!-- Company HQ -->
+    <div class="elem-hdr">
+      <div class="elem-label" style="color:var(--gold)">Company HQ</div>
+      <div class="elem-line"></div>
+      <div class="elem-count">4 billets</div>
+    </div>
+
+    <table class="roster-table">
+      <thead><tr><th>Rank</th><th>Name</th><th>Role / Position</th><th>MOS</th><th>Quals</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="vacant">
+          <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">CPT</span></div></div></td>
+          <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+          <td><div class="cell-role vacant"><div class="role">Company Commander</div></div></td>
+          <td class="mono" style="font-size:10px;color:var(--dim)">11A</td>
+          <td></td>
+          <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+        </tr>
+        <tr>
+          <td><div class="cell-rank"><div class="rank-box" style="background:var(--gold-glow);border:1px solid rgba(210,153,34,.25)"><span class="rank-abbr">2LT</span></div></div></td>
+          <td><div class="cell-name"><div class="name">D.Anderson</div><div class="callsign">Badger</div></div></td>
+          <td><div class="cell-role"><div class="role">Platoon Leader</div><div class="mos">11A · Infantry Officer</div></div></td>
+          <td class="mono" style="font-size:10px;color:var(--muted)">11A</td>
+          <td><div class="cell-quals"><span class="qual">Ranger Tab</span><span class="qual">Airborne</span></div></td>
+          <td><span class="status active"><span class="dot"></span>Active</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Platoon nest -->
+    <div class="nest" style="border-color:rgba(88,166,255,.15);margin-top:20px">
+
+      <div class="section-hdr" style="margin-left:-20px">
+        <span class="echelon-badge" style="color:var(--blue);background:var(--blue-dim);border:1px solid rgba(88,166,255,.2)">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          PLT
+        </span>
+        <div>
+          <div class="section-title">1st Platoon — Outlaws</div>
+          <div class="section-sub">1st Plt · A Co · 1/75th RGR</div>
+        </div>
+        <div class="section-strength">
+          <div class="strength-fraction mono"><span>6</span> / 24</div>
+          <div class="mini-fill"><div style="width:25%;background:var(--blue)"></div></div>
+        </div>
+      </div>
+
+      <!-- PLT HQ -->
+      <div class="elem-hdr">
+        <div class="elem-label" style="color:var(--blue)">Platoon HQ</div>
+        <div class="elem-line"></div>
+        <div class="elem-count">2 billets</div>
+      </div>
+
+      <table class="roster-table">
+        <thead><tr><th>Rank</th><th>Name</th><th>Role / Position</th><th>MOS</th><th>Quals</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="cell-rank"><div class="rank-box" style="background:var(--blue-dim);border:1px solid rgba(88,166,255,.2)"><span class="rank-abbr" style="color:var(--blue)">2LT</span></div></div></td>
+            <td><div class="cell-name"><div class="name">D.Anderson</div><div class="callsign">Badger</div></div></td>
+            <td><div class="cell-role"><div class="role">Platoon Leader</div><div class="mos">11A · Infantry Officer</div></div></td>
+            <td class="mono" style="font-size:10px;color:var(--muted)">11A</td>
+            <td><div class="cell-quals"><span class="qual">Ranger Tab</span><span class="qual">Airborne</span></div></td>
+            <td><span class="status active"><span class="dot"></span>Active</span></td>
+          </tr>
+          <tr class="vacant">
+            <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">SFC</span></div></div></td>
+            <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+            <td><div class="cell-role vacant"><div class="role">Platoon Sergeant</div></div></td>
+            <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+            <td></td>
+            <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Squads nest -->
+      <div class="nest" style="border-color:rgba(57,208,216,.15);margin-top:20px">
+
+        <!-- 1st Squad -->
+        <div class="elem-hdr">
+          <div class="elem-label" style="color:var(--teal)">1st Squad · Alpha</div>
+          <div class="elem-line"></div>
+          <div class="elem-count">8 billets</div>
+        </div>
+        <table class="roster-table">
+          <thead><tr><th>Rank</th><th>Name</th><th>Role / Position</th><th>MOS</th><th>Quals</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="cell-rank"><div class="rank-box" style="background:var(--teal-dim);border:1px solid rgba(57,208,216,.2)"><span class="rank-abbr" style="color:var(--teal)">SSG</span></div></div></td>
+              <td><div class="cell-name"><div class="name">C.Croney</div><div class="callsign">Ghost-1</div></div></td>
+              <td><div class="cell-role"><div class="role">Squad Leader</div><div class="mos">11B · Infantryman</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--muted)">11B</td>
+              <td><div class="cell-quals"><span class="qual">Ranger Tab</span><span class="qual">Airborne</span><span class="qual">HALO</span></div></td>
+              <td><span class="status active"><span class="dot"></span>Active</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-rank"><div class="rank-box" style="background:var(--teal-dim);border:1px solid rgba(57,208,216,.2)"><span class="rank-abbr" style="color:var(--teal)">PVT</span></div></div></td>
+              <td><div class="cell-name"><div class="name">WindowSmudge</div><div class="callsign">Smudge</div></div></td>
+              <td><div class="cell-role"><div class="role">Rifleman</div><div class="mos">11B · Infantryman</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--muted)">11B</td>
+              <td><div class="cell-quals"><span class="qual">Airborne</span></div></td>
+              <td><span class="status active"><span class="dot"></span>Active</span></td>
+            </tr>
+            <tr class="vacant">
+              <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">SGT</span></div></div></td>
+              <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+              <td><div class="cell-role vacant"><div class="role">Team Leader</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+              <td></td>
+              <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+            </tr>
+            <tr class="vacant">
+              <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">SPC</span></div></div></td>
+              <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+              <td><div class="cell-role vacant"><div class="role">Grenadier</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+              <td></td>
+              <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2nd Squad -->
+        <div class="elem-hdr" style="margin-top:24px">
+          <div class="elem-label" style="color:var(--teal)">2nd Squad · Bravo</div>
+          <div class="elem-line"></div>
+          <div class="elem-count">8 billets</div>
+        </div>
+        <table class="roster-table">
+          <thead><tr><th>Rank</th><th>Name</th><th>Role / Position</th><th>MOS</th><th>Quals</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="vacant">
+              <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">SSG</span></div></div></td>
+              <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+              <td><div class="cell-role vacant"><div class="role">Squad Leader</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+              <td></td>
+              <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-rank"><div class="rank-box" style="background:var(--teal-dim);border:1px solid rgba(57,208,216,.2)"><span class="rank-abbr" style="color:var(--teal)">PVT</span></div></div></td>
+              <td><div class="cell-name"><div class="name">Dommynation</div><div class="callsign">Dom</div></div></td>
+              <td><div class="cell-role"><div class="role">Rifleman</div><div class="mos">11B · Infantryman</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--muted)">11B</td>
+              <td></td>
+              <td><span class="status active"><span class="dot"></span>Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Weapons Squad -->
+        <div class="elem-hdr" style="margin-top:24px">
+          <div class="elem-label" style="color:var(--teal)">Weapons Squad</div>
+          <div class="elem-line"></div>
+          <div class="elem-count">6 billets</div>
+        </div>
+        <table class="roster-table">
+          <thead><tr><th>Rank</th><th>Name</th><th>Role / Position</th><th>MOS</th><th>Quals</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="vacant">
+              <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">SSG</span></div></div></td>
+              <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+              <td><div class="cell-role vacant"><div class="role">Weapons Squad Leader</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+              <td></td>
+              <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+            </tr>
+            <tr class="vacant">
+              <td><div class="cell-rank"><div class="rank-box" style="background:rgba(72,79,88,.1);border:1px solid var(--border)"><span class="rank-abbr vacant">SPC</span></div></div></td>
+              <td><div class="cell-name vacant"><div class="name">— Vacant Billet —</div></div></td>
+              <td><div class="cell-role vacant"><div class="role">M240 Gunner</div></div></td>
+              <td class="mono" style="font-size:10px;color:var(--dim)">11B</td>
+              <td></td>
+              <td><span class="status vacant"><span class="dot"></span>Vacant</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div><!-- /squads -->
+    </div><!-- /platoon -->
+  </div><!-- /company -->
+
+  <!-- RASP PIPELINE -->
+  <div class="divider">RASP Pipeline · Training</div>
+
+  <div class="section-hdr" style="border-color:rgba(240,136,62,.15)">
+    <span class="echelon-badge" style="color:var(--amber);background:var(--amber-dim);border:1px solid rgba(240,136,62,.2)">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      RASP
+    </span>
+    <div>
+      <div class="section-title">Ranger Assessment &amp; Selection Program</div>
+      <div class="section-sub">Pre-Assignment Pipeline · Awaiting Billet Assignment</div>
+    </div>
+    <div class="section-strength">
+      <div class="strength-fraction mono"><span style="color:var(--amber)">4</span> candidates</div>
+    </div>
+  </div>
+
+  <div class="rasp-grid">
+    <div class="rasp-card">
+      <div class="rasp-card-rank">PVT · 11B</div>
+      <div class="rasp-card-name">Dommynation</div>
+      <div class="rasp-card-callsign">Dom</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
+        <div class="rasp-card-role">Ranger Trainee</div>
+        <span class="status rasp" style="font-size:8px;padding:2px 6px"><span class="dot"></span>RASP</span>
+      </div>
+    </div>
+    <div class="rasp-card" style="opacity:.5">
+      <div class="rasp-card-rank">PVT · 11B</div>
+      <div class="rasp-card-name" style="color:var(--dim)">Awaiting Recruit</div>
+      <div class="rasp-card-callsign">—</div>
+    </div>
+    <div class="rasp-card" style="opacity:.5">
+      <div class="rasp-card-rank">PVT · 11B</div>
+      <div class="rasp-card-name" style="color:var(--dim)">Awaiting Recruit</div>
+      <div class="rasp-card-callsign">—</div>
+    </div>
+  </div>
+
+  <!-- WALL OF HONOR -->
+  <div class="divider">Wall of Honor</div>
+  <div class="honor-empty">
+    <p>No entries yet — this wall honors Rangers who have served with distinction in 1st Platoon, A Co, 1/75th RGR.</p>
+  </div>
+
+</div>
+<script>
+const RANK_IMAGES = {
+  PVT: '/insignia/ranks/E1-PVT-69a12d80c6a4e.png',
+  PV2: '/insignia/ranks/E2-PV2-6999ba19e286b.png',
+  PFC: '/insignia/ranks/E3-PFC-69b67ad12756e.png',
+  SPC: '/insignia/ranks/E4-SPC-69b67ad8ccce6.png',
+  CPL: '/insignia/ranks/E4X-CPL-69b67ae206ef4.png',
+  SGT: '/insignia/ranks/E5-SGT-6999b9cc6474e.png',
+  SSG: '/insignia/ranks/E6-SSG-6999b9b952f93.png',
+  SFC: '/insignia/ranks/E7-SFC-6999b9a7c5144.png',
+  MSG: '/insignia/ranks/E8-MSG-6999b983e4705.png',
+  '1SG': '/insignia/ranks/E8X-1SG-6999b918e1887.png',
+  SGM: '/insignia/ranks/E9-SGM-6999b8ff8e0f4.png',
+  CSM: '/insignia/ranks/E9X-CSM-6999b8e3d9ec0.png',
+  WO1: '/insignia/ranks/W1-WO1-6999b6dd8874c.png',
+  CW2: '/insignia/ranks/W2-CW2-6999b6c4122ad.png',
+  CW3: '/insignia/ranks/W3-CW3-6999b6af38e4a.png',
+  '2LT': '/insignia/ranks/O1-2LT-6999b57050da7.png',
+  '1LT': '/insignia/ranks/O2-1LT-6999b55b25615.png',
+  CPT: '/insignia/ranks/O3-CPT-6999b54675e25.png',
+  MAJ: '/insignia/ranks/O4-MAJ-6999b5341b384.png',
+  LTC: '/insignia/ranks/O5-LTC-6999b470e637c.png',
+  COL: '/insignia/ranks/O6-COL-6999b3e5dc0ae.png',
+};
+
+document.querySelectorAll('.rank-box').forEach(box => {
+  const span = box.querySelector('.rank-abbr');
+  if (!span) return;
+  const rank = span.textContent.trim();
+  const src = RANK_IMAGES[rank];
+  if (src) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = rank;
+    img.style.cssText = 'width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 0 3px rgba(210,153,34,.25))';
+    box.innerHTML = '';
+    box.appendChild(img);
+  }
+});
+</script>
+</body>
+</html>
