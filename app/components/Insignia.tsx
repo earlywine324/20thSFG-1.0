@@ -300,13 +300,6 @@ export function QualBadge({ abbr, size = 48 }: { abbr: string; size?: number }) 
           <text x="34" y="19" textAnchor="middle" fill="#c9a128" fontSize="11" fontWeight="900" letterSpacing="2">SPECIAL FORCES</text>
         </svg>
       );
-    case "Ranger Tab":
-      return (
-        <svg width={size * 1.2} height={size * 0.6} viewBox="0 0 58 28" fill="none">
-          <rect x="1" y="2" width="56" height="24" rx="4" fill="#000" stroke="#c9a128" strokeWidth="1.5" />
-          <text x="29" y="19" textAnchor="middle" fill="#c9a128" fontSize="12" fontWeight="900" letterSpacing="2">RANGER</text>
-        </svg>
-      );
     case "Sapper Tab":
       return (
         <svg width={size * 1.2} height={size * 0.6} viewBox="0 0 58 28" fill="none">

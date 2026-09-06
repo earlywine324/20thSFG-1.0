@@ -70,7 +70,7 @@ function LoginForm() {
           className="text-[9px] tracking-[0.15em] uppercase hidden md:block"
           style={{ color: "#505870", fontFamily: "monospace" }}
         >
-          1/75TH RGR — RGRNET ACCESS TERMINAL
+          20TH SFG — RGRNET ACCESS TERMINAL
         </span>
       </div>
 
@@ -90,7 +90,7 @@ function LoginForm() {
               >
                 <Image
                   src="/logo-new.png"
-                  alt="1/75th RGR"
+                  alt="20th SFG"
                   width={72}
                   height={72}
                   style={{
@@ -111,13 +111,13 @@ function LoginForm() {
               className="text-xl font-black tracking-widest uppercase mb-2"
               style={{ color: "#e8edf5", fontFamily: "monospace" }}
             >
-              RANGER NET LOGIN
+              ODA NETWORK LOGIN
             </h1>
             <p
               className="text-[10px] tracking-[0.15em] uppercase"
               style={{ color: "#505870", fontFamily: "monospace" }}
             >
-              1st Plt · Alpha Co · 1/75th Ranger Regiment
+              ODA 2011 · 20th Special Forces Group
             </p>
 
             <div className="flex items-center justify-center gap-3 mt-5">
@@ -126,7 +126,7 @@ function LoginForm() {
                 className="text-[8px] tracking-[0.2em] uppercase"
                 style={{ color: "#2e3650", fontFamily: "monospace" }}
               >
-                OUTLAWS · BELLUM
+                ODA 2011 · ARMA
               </span>
               <div className="w-10 h-px" style={{ backgroundColor: "#161b27" }} />
             </div>
@@ -312,7 +312,7 @@ function LoginForm() {
           className="text-[9px] tracking-[0.2em] uppercase"
           style={{ color: "#1e2535", fontFamily: "monospace" }}
         >
-          1ST PLT, A CO, 1/75TH RANGER REGIMENT — OUTLAWS · BELLUM · EST 2026
+          ODA 2011, 20TH SPECIAL FORCES GROUP — ODA 2011 · ARMA · EST 2026
         </p>
       </div>
     </div>

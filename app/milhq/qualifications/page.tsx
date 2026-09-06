@@ -16,19 +16,19 @@ const QUALIFICATIONS: { section: string; subtitle: string; items: Qualification[
     subtitle: "Shoulder Tabs & Unit Identifiers",
     items: [
       {
-        name: "Ranger Tab",
-        abbr: "Ranger Tab",
-        image: "/insignia/quals/Ranger-Tab-69c21f34e155a.png",
+        name: "Special Forces Tab",
+        abbr: "SF Tab",
+        image: "/insignia/quals/Special-Forces-Tab-69c21fa3c81dc.png",
         category: "tab",
-        description: "The Ranger Tab is the most prestigious qualification in the unit, earned through completion of the Ranger School equivalent — an intense 62-day small-unit leadership course covering patrolling, raids, ambushes, and survival in mountain, swamp, and desert environments. Every Ranger in 1/75th is expected to earn this tab.",
-        requirements: ["Complete RASP (Ranger Assessment and Selection Program)", "Complete Mountain, Swamp, and Desert phases", "Pass all patrol evaluations", "Peer evaluation score above threshold", "Platoon Leader endorsement"],
+        description: "The Special Forces Tab identifies operators who have completed the unit qualification course and demonstrated proficiency across ODA mission sets.",
+        requirements: ["Complete selection", "Complete the unit qualification course", "Pass all field evaluations", "Meet peer evaluation standards", "Detachment leadership endorsement"],
       },
       {
         name: "Sapper Tab",
         abbr: "Sapper Tab",
         image: "/insignia/quals/sapper.png",
         category: "tab",
-        description: "Awarded to soldiers who complete the Sapper Leader Course equivalent, demonstrating mastery of combat engineering, demolitions, route clearance, and obstacle construction/breaching. Sapper-qualified Rangers bring critical engineer capability to any squad.",
+        description: "Awarded to members who complete the Sapper Leader Course equivalent and demonstrate mastery of combat engineering, demolitions, route clearance, and breaching.",
         requirements: ["Open to all MOS", "Complete Sapper assessment phase", "Pass demolitions qualification", "Complete combat engineering evaluations", "Physical fitness standard met"],
       },
     ],
@@ -42,7 +42,7 @@ const QUALIFICATIONS: { section: string; subtitle: string; items: Qualification[
         abbr: "Airborne",
         image: "/insignia/quals/Parachutist-Basic-69c215b3a9bbb.png",
         category: "badge",
-        description: "The basic parachutist qualification. Airborne-qualified soldiers have completed jump school and are certified for static-line parachute operations. This is a foundational qualification for all Rangers — every member of the 1/75th is expected to be Airborne qualified.",
+        description: "The basic parachutist qualification. Airborne-qualified members have completed jump school and are certified for static-line parachute operations.",
         requirements: ["Complete Ground Week training", "Complete Tower Week training", "Execute minimum 5 qualifying static-line jumps", "Pass physical fitness requirements"],
       },
       {
@@ -185,7 +185,7 @@ export default function QualificationsPage() {
           </div>
           <h1 className="text-5xl font-black mb-4" style={{ color: "#e8e4d8" }}>Qualifications</h1>
           <p className="max-w-xl leading-relaxed" style={{ color: "#8a8870" }}>
-            Badges, tabs, and skill qualifications authorized by 1st Plt, A Co, 1/75th RGR. Rangers earn these through completing training courses, operational experience, and demonstrating proficiency.
+            Badges, tabs, and skill qualifications authorized by ODA 2011, 20th SFG. Operators earn these through completing training courses, operational experience, and demonstrating proficiency.
           </p>
         </div>
       </section>

@@ -246,7 +246,7 @@ export default function EnlistForm({ openBillets }: { openBillets: OpenBillet[] 
           <div className="grid md:grid-cols-2 gap-5">
             <div>
               <label className="block text-[10px] font-black tracking-widest uppercase mb-2" style={{ color: "#505870" }}>
-                Bellum / Milsim Hours <span style={{ color: "#4db6e0" }}>*</span>
+                Arma / Milsim Hours <span style={{ color: "#4db6e0" }}>*</span>
               </label>
               <select name="armaHours" required className={inputCls} style={inputStyle}>
                 <option value="">Select range</option>
@@ -411,7 +411,7 @@ export default function EnlistForm({ openBillets }: { openBillets: OpenBillet[] 
           <div className="space-y-5">
             <div>
               <label className="block text-[10px] font-black tracking-widest uppercase mb-2" style={{ color: "#505870" }}>
-                Why do you want to join the Outlaws (1/75th RGR)? <span style={{ color: "#4db6e0" }}>*</span>
+                Why do you want to join ODA 2011 (20th SFG)? <span style={{ color: "#4db6e0" }}>*</span>
               </label>
               <textarea
                 name="motivation"
@@ -446,7 +446,7 @@ export default function EnlistForm({ openBillets }: { openBillets: OpenBillet[] 
             <ChevronRight className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: "#4db6e0" }} />
             <p className="text-xs leading-relaxed" style={{ color: "#505870" }}>
               By submitting this application you acknowledge that entry is selective, that you
-              will be required to complete RASP before squad assignment, and that you agree to
+              will be required to complete selection and onboarding before ODA assignment, and that you agree to
               operate under the unit&#39;s chain of command and standards of conduct.
             </p>
           </div>

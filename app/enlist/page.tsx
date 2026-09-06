@@ -55,7 +55,7 @@ export default async function EnlistPage() {
         icon: <CheckCircle className="w-12 h-12" style={{ color: "#4ade80" }} />,
         color: "#4ade80",
         title: "APPLICATION APPROVED",
-        message: "Congratulations! Your application has been approved. Check Discord for your IET assignment and next steps.",
+        message: "Congratulations! Your application has been approved. Check Discord for your selection and onboarding assignment.",
       },
       DENIED: {
         icon: <XCircle className="w-12 h-12" style={{ color: "#ef4444" }} />,
@@ -91,7 +91,8 @@ export default async function EnlistPage() {
     .from("soldiers")
     .select("id, role, mos, mos_title, team, unit")
     .eq("status", "VACANT")
-    .eq("unit", "Alpha Company, 1/75th RGR")
+    .eq("unit", "20th Special Forces Group")
+    .eq("team", "ODA 2011")
     .not("role", "ilike", "%leader%")
     .not("role", "ilike", "%sergeant%")
     .not("role", "ilike", "%commander%")

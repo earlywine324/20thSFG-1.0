@@ -35,7 +35,7 @@ interface Placed {
 interface TF { x: number; y: number; scale: number }
 
 const UNITS: ToolDef[] = [
-  { id: 'rng-sqd', label: 'Ranger Squad',   team: 'friendly', category: 'unit' },
+  { id: 'rng-sqd', label: 'Special Forces Team',   team: 'friendly', category: 'unit' },
   { id: 'chalk-a', label: 'Chalk Alpha',     team: 'friendly', category: 'unit' },
   { id: 'chalk-b', label: 'Chalk Bravo',     team: 'friendly', category: 'unit' },
   { id: 'cmd',     label: 'Command Element', team: 'friendly', category: 'unit' },
@@ -387,7 +387,7 @@ export default function PlannerClient() {
               <Menu className="w-4 h-4" />
             </button>
             <span className="font-black text-[#a3e635] tracking-[0.2em] text-sm uppercase">
-              RANGER PLANNER
+              SPECIAL OPERATIONS PLANNER
             </span>
           </div>
 

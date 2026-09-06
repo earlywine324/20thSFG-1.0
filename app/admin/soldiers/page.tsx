@@ -38,46 +38,16 @@ function buildGroups(soldiers: Soldier[]): BilletGroup[] {
 
   const groups: BilletGroup[] = [
     {
-      title: "Battalion HQ",
-      subtitle: "1/75th RGR",
+      title: "ODA 2011",
+      subtitle: "20th Special Forces Group",
       color: "#c9a128",
-      billets: pick((s) => s.unit === "Battalion HQ"),
+      billets: pick((s) => s.unit === "20th Special Forces Group" && s.team === "ODA 2011"),
     },
     {
-      title: "Company HQ",
-      subtitle: "Alpha Company",
-      color: "#c9a128",
-      billets: pick((s) => s.unit === "Alpha Company, 1/75th RGR" && s.team === "Company HQ"),
-    },
-    {
-      title: "Platoon HQ",
-      subtitle: "1st Platoon",
-      color: "#4db6e0",
-      billets: pick((s) => s.unit === "Platoon HQ"),
-    },
-    {
-      title: "1st Squad",
-      subtitle: "Alpha Company",
-      color: "#4db6e0",
-      billets: pick((s) => s.unit === "Alpha Company, 1/75th RGR" && s.team === "1st Squad"),
-    },
-    {
-      title: "2nd Squad",
-      subtitle: "Alpha Company",
-      color: "#4db6e0",
-      billets: pick((s) => s.unit === "Alpha Company, 1/75th RGR" && s.team === "2nd Squad"),
-    },
-    {
-      title: "3rd Squad",
-      subtitle: "Alpha Company",
-      color: "#4db6e0",
-      billets: pick((s) => s.unit === "Alpha Company, 1/75th RGR" && s.team === "3rd Squad"),
-    },
-    {
-      title: "4th Squad · Weapons",
-      subtitle: "Alpha Company",
-      color: "#4db6e0",
-      billets: pick((s) => s.unit === "Alpha Company, 1/75th RGR" && s.team === "Weapons Squad"),
+      title: "MH-60M Crew 1",
+      subtitle: "160th SOAR (A)",
+      color: "#a78bfa",
+      billets: pick((s) => s.unit === "160th SOAR (A)" && s.team === "MH-60M Crew 1"),
     },
     {
       title: "Administrative",
@@ -86,18 +56,11 @@ function buildGroups(soldiers: Soldier[]): BilletGroup[] {
       billets: pick((s) => s.unit === "Administrative"),
     },
     {
-      title: "RASP Pipeline",
-      subtitle: "Trainees",
+      title: "Selection Pipeline",
+      subtitle: "Candidates",
       color: "#f59e0b",
-      billets: pick((s) => s.unit === "RASP Pipeline"),
+      billets: pick((s) => s.unit === "Selection Pipeline"),
     },
-    // 160th SOAR closed — uncomment to reopen
-    // {
-    //   title: "160th SOAR",
-    //   subtitle: "Night Stalkers",
-    //   color: "#a78bfa",
-    //   billets: pick((s) => s.unit === "160th SOAR"),
-    // },
   ];
 
   // Catch-all for anything not matched above

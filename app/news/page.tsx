@@ -123,7 +123,7 @@ export default async function NewsPage() {
                 Unit News
               </h1>
               <p className="text-[#8892a4] text-sm leading-relaxed max-w-lg">
-                SITREPs, AARs, announcements, and operational updates from 1st Platoon, A Co, 1/75th Ranger Regiment.
+                SITREPs, AARs, announcements, and operational updates from ODA 2011, 20th Special Forces Group.
               </p>
             </div>
             {admin && (
@@ -222,7 +222,7 @@ export default async function NewsPage() {
         style={{ borderTop: "1px solid #161b27" }}
       >
         <p className="text-[9px] tracking-[0.3em] uppercase" style={{ color: "#2e3650", fontFamily: "monospace" }}>
-          1ST PLT, A CO, 1/75TH RGR — OUTLAWS // ALL INFORMATION UNCLASSIFIED // PUBLIC RELEASE AUTHORIZED
+          ODA 2011 · 20TH SFG // ALL INFORMATION UNCLASSIFIED // PUBLIC RELEASE AUTHORIZED
         </p>
       </div>
     </div>

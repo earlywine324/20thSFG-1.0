@@ -17,7 +17,7 @@ const STAFF_SECTIONS = [
 ];
 
 const QUAL_OPTIONS = [
-  "SF Tab", "Ranger Tab", "Sapper Tab", "Airborne", "HALO",
+  "SF Tab", "Sapper Tab", "Airborne", "HALO",
   "Air Assault", "CIB", "EIB", "Combat Diver", "SOCM",
   "Demo", "JTAC", "Pathfinder",
 ];
@@ -108,7 +108,7 @@ export default function SoldierForm({
               {STATUSES.map((st) => <option key={st} value={st}>{st}</option>)}
             </select>
           </div>
-          <Field label="Unit *" name="unit" defaultValue={(s.unit as string) || prefill?.unit} required placeholder="Alpha Company, 1/75th RGR" />
+          <Field label="Unit *" name="unit" defaultValue={(s.unit as string) || prefill?.unit} required placeholder="20th Special Forces Group" />
           <Field label="Team" name="team" defaultValue={(s.team as string) || prefill?.team} placeholder="1st Squad" />
         </div>
       </Section>

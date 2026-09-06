@@ -16,7 +16,7 @@ export type OpenBillet = {
 
 const REQUIREMENTS = [
   { label: "Minimum Age",           value: "16 years or older" },
-  { label: "Platform",              value: "Bellum" },
+  { label: "Primary Platform",      value: "Arma" },
   { label: "Commitment",            value: "Primary ops Saturdays, mandatory attendance" },
   { label: "Communication",         value: "Discord required — active participation expected" },
   { label: "Conduct",               value: "Maturity, discipline, and team-first mentality" },
@@ -116,7 +116,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
               className="text-[10px] font-black tracking-[0.4em] uppercase mb-4"
               style={{ color: "#4db6e0", fontFamily: "monospace" }}
             >
-              1st Platoon · Alpha Company · 1/75th Ranger Regiment
+              ODA 2011 · 20th Special Forces Group
             </p>
 
             {/* Title */}
@@ -134,7 +134,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
                 className="text-[9px] tracking-[0.3em] uppercase"
                 style={{ color: "#505870", fontFamily: "monospace" }}
               >
-                OUTLAWS · BELLUM
+                ODA 2011 · ARMA
               </span>
               <div className="w-16 h-px" style={{ backgroundColor: "#161b27" }} />
             </div>
@@ -144,9 +144,9 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
               className="text-sm leading-relaxed mb-3 mx-auto max-w-lg"
               style={{ color: "#8892a4" }}
             >
-              We are a Bellum milsim unit inspired by 1st Platoon, Alpha Company, 1/75th Ranger
-              Regiment. We aim to replicate the structure, teamwork, and professionalism of a
-              Ranger platoon — without the over-the-top strictness.
+              We are an Arma realism unit modeled around ODA 2011, 20th Special Forces Group.
+              We use authentic roles, teamwork, and mission planning while keeping the community
+              welcoming and enjoyable. Members also play other games together.
             </p>
             <p
               className="text-sm leading-relaxed mb-10 mx-auto max-w-lg"
@@ -230,7 +230,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
               className="text-[9px] tracking-[0.3em] uppercase mt-10"
               style={{ color: "#2e3650", fontFamily: "monospace" }}
             >
-              1ST PLT, A CO, 1/75TH RGR — RECRUITMENT CELL OVERSIGHT
+              ODA 2011, 20TH SFG — RECRUITMENT CELL OVERSIGHT
               <br />
               <span style={{ color: "#1e2535" }}>
                 ENTRY IS A PRIVILEGE, NOT A GUARANTEE

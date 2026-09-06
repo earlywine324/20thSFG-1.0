@@ -1,5 +1,5 @@
 export const QUALIFICATION_NAMES: string[] = [
-  "Ranger Tab",
+  "SF Tab",
   "Sapper Tab",
   "Airborne",
   "HALO",

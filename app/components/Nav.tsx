@@ -118,7 +118,7 @@ export default function Nav() {
             <span className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>
               20<span style={{ color: "#4db6e0" }}>th</span> SFG
             </span>
-            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8892a4" }}>ODA 2011 · Bellum</span>
+            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8892a4" }}>ODA 2011 · Arma</span>
           </div>
         </Link>
 
@@ -190,7 +190,7 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-3">
           {/* Vote */}
           <a
-            href="https://milsimunits.com/unit/1-75thrr"
+            href="/enlist"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-[10px] font-black tracking-widest uppercase px-3 py-2 rounded transition-all"
@@ -365,7 +365,7 @@ export default function Nav() {
 
           {/* Vote — mobile */}
           <a
-            href="https://milsimunits.com/unit/1-75thrr"
+            href="/enlist"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
@@ -373,7 +373,7 @@ export default function Nav() {
             style={{ backgroundColor: "rgba(251,191,36,0.08)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.3)" }}
           >
             <ChevronUp className="w-4 h-4" />
-            Vote for Us on MilsimUnits
+            Join ODA 2011
           </a>
 
           <a

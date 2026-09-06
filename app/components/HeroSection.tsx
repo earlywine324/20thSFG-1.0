@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <Image
           src="/bg-main.png"
-          alt="1st Ranger Battalion"
+          alt="20th Special Forces Group realism unit"
           fill
           priority
           className="object-cover object-center"
@@ -49,7 +49,7 @@ export default function HeroSection() {
             UNCLASSIFIED // PUBLIC RELEASE
           </span>
           <span className="text-[10px] tracking-[0.15em] uppercase hidden md:block" style={{ color: "#505870", fontFamily: "monospace" }}>
-            1ST PLT, A CO, 1/75TH RGR — OUTLAWS
+            ODA 2011 · 20TH SFG
           </span>
         </div>
       </div>
@@ -61,7 +61,7 @@ export default function HeroSection() {
         <div className="flex justify-center mb-8">
           <Image
             src="/logo-new.png"
-            alt="1/75th RGR Crest"
+            alt="20th SFG Crest"
             width={170}
             height={170}
             priority
@@ -71,12 +71,12 @@ export default function HeroSection() {
 
         {/* Title */}
         <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] mb-4" style={{ color: "#e8edf5" }}>
-          1<span style={{ color: "#4db6e0" }}>st</span> Platoon · Outlaws
+          ODA <span style={{ color: "#4db6e0" }}>2011</span>
         </h1>
 
         {/* Tagline */}
         <p className="text-lg md:text-xl tracking-[0.25em] uppercase mb-3" style={{ color: "#8892a4", fontFamily: "monospace" }}>
-          Alpha Company · 1/75th Ranger Regiment · Bellum
+          20th Special Forces Group · Arma Realism
         </p>
 
         {/* Divider */}

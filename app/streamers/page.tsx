@@ -497,7 +497,7 @@ export default async function StreamersPage() {
               </span>
               <span className="w-px h-3" style={{ backgroundColor: "rgba(239,68,68,0.3)" }} />
               <span className="text-[9px] tracking-[0.2em] uppercase" style={{ color: "#505870", fontFamily: "monospace" }}>
-                1st PLT · A CO · 1/75th RGR
+                1st PLT · A CO · 20th SFG
               </span>
             </div>
 
@@ -513,7 +513,7 @@ export default async function StreamersPage() {
               className="text-sm max-w-md mb-8"
               style={{ color: "#505870" }}
             >
-              Watch Rangers from 1st Platoon live on Twitch. Support the unit — follow, subscribe, tune in.
+              Watch members of ODA 2011 live on Twitch. Support the unit — follow, subscribe, tune in.
             </p>
 
             {/* Stats row */}

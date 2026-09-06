@@ -1,6 +1,6 @@
 /** Maps qualification abbreviations to their insignia image paths */
 export const QUAL_IMAGES: Record<string, string> = {
-  "Ranger Tab":   "/insignia/quals/Ranger-Tab-69c21f34e155a.png",
+  "SF Tab":       "/insignia/quals/Special-Forces-Tab-69c21fa3c81dc.png",
   "Sapper Tab":   "/insignia/quals/sapper.png",
   "Airborne":     "/insignia/quals/Parachutist-Basic-69c215b3a9bbb.png",
   "HALO":         "/insignia/quals/Freefall-Basic-69c21d2b272da.png",

@@ -80,7 +80,7 @@ export default function ResetPasswordPage() {
           className="text-[9px] tracking-[0.15em] uppercase hidden md:block"
           style={{ color: "#505870", fontFamily: "monospace" }}
         >
-          1/75TH RGR — RGRNET ACCESS TERMINAL
+          20TH SFG — RGRNET ACCESS TERMINAL
         </span>
       </div>
 
@@ -100,7 +100,7 @@ export default function ResetPasswordPage() {
               >
                 <Image
                   src="/logo-new.png"
-                  alt="1/75th RGR"
+                  alt="20th SFG"
                   width={64}
                   height={64}
                   style={{
@@ -288,7 +288,7 @@ export default function ResetPasswordPage() {
           className="text-[9px] tracking-[0.2em] uppercase"
           style={{ color: "#1e2535", fontFamily: "monospace" }}
         >
-          1ST PLT, A CO, 1/75TH RANGER REGIMENT — OUTLAWS · BELLUM · EST 2026
+          ODA 2011, 20TH SPECIAL FORCES GROUP — ODA 2011 · ARMA · EST 2026
         </p>
       </div>
     </div>

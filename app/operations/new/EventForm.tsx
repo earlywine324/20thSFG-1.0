@@ -8,7 +8,7 @@ import { Calendar, Clock, Target, Users, Radio, MapPin, FileText, ChevronLeft } 
 const EVENT_TYPES = [
   "FTX / Operation",
   "Squad Drill",
-  "RASP Training",
+  "Selection Training",
   "Course / School",
   "Ceremony",
 ] as const;
@@ -21,7 +21,7 @@ const ELEMENTS = [
   "Weapons Squad",
   "1st Squad / 2nd Squad",
   "All Qualified Personnel",
-  "RASP Candidates",
+  "Selection Candidates",
 ];
 
 function Field({

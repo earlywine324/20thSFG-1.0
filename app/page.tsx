@@ -2,13 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Shield, Crosshair, Radio,
-  Globe, Zap, BookOpen, ArrowRight, MapPin, Users, TrendingUp,
-} from "lucide-react";
+  Globe, Zap, BookOpen, ArrowRight, MapPin, Users, } from "lucide-react";
 import HeroSection from "./components/HeroSection";
 import { createClient } from "@/app/lib/supabase/server";
 
 const UNIT_CARDS = [
-  { icon: Shield, title: "Ranger Operations", desc: "Direct Action" },
+  { icon: Shield, title: "Special Operations", desc: "Direct Action" },
   { icon: Crosshair, title: "Strike & Raid", desc: "Precision Raids" },
   { icon: Globe, title: "Special Recon", desc: "Deep Infiltration" },
   { icon: Radio, title: "Personnel Recovery", desc: "CSAR & EXFIL" },
@@ -18,8 +17,8 @@ const UNIT_CARDS = [
 const CAPABILITIES = [
   { icon: Crosshair, title: "Direct Action", body: "Precision raids against HVTs and key terrain. Fast-rope insertions, CQB, and time-sensitive strike missions." },
   { icon: Globe, title: "Special Reconnaissance", body: "Long-range patrol, OP establishment, and battle damage assessment deep behind enemy lines." },
-  { icon: Radio, title: "Personnel Recovery", body: "CSAR and EXFIL of isolated personnel. Rangers don't leave anyone behind." },
-  { icon: BookOpen, title: "Airfield Seizure", body: "Rapid seizure of enemy airfields to enable follow-on forces. A hallmark of the 75th Ranger Regiment." },
+  { icon: Radio, title: "Personnel Recovery", body: "CSAR and EXFIL of isolated personnel. The team does not leave anyone behind." },
+  { icon: BookOpen, title: "Airfield Seizure", body: "Rapid seizure of enemy airfields to enable follow-on forces. A core special operations capability." },
   { icon: Zap, title: "HALO / HAHO Infiltration", body: "Military freefall enabling covert high-altitude infiltration into denied or austere environments." },
   { icon: Shield, title: "Urban Assault", body: "Close-quarters battle, building clearance, and urban terrain dominance at speed and under fire." },
 ];
@@ -47,7 +46,7 @@ function formatOpDate(iso: string): string {
 const TYPE_COLOR: Record<string, string> = {
   "FTX / Operation": "text-red-400",
   "Squad Drill":     "text-amber-400",
-  "RASP Training":   "text-blue-400",
+  "Selection Training":   "text-blue-400",
   "Course / School": "text-green-400",
   "Ceremony":        "text-purple-400",
 };
@@ -57,7 +56,7 @@ export default async function Home() {
 
   const [
     { data },
-    { count: totalRangers },
+    { count: totalOperators },
     { count: opsCompleted },
     { data: squadRows },
     { count: vacantBillets },
@@ -72,7 +71,7 @@ export default async function Home() {
       .from("soldiers")
       .select("*", { count: "exact", head: true })
       .eq("status", "ACTIVE DUTY")
-      .neq("unit", "RASP Pipeline"),
+      .neq("unit", "Selection Pipeline"),
     supabase
       .from("events")
       .select("*", { count: "exact", head: true })
@@ -81,8 +80,8 @@ export default async function Home() {
       .from("soldiers")
       .select("team")
       .eq("status", "ACTIVE DUTY")
-      .eq("unit", "Alpha Company, 1/75th RGR")
-      .in("team", ["1st Squad", "2nd Squad", "3rd Squad", "Weapons Squad"]),
+      .eq("unit", "20th Special Forces Group")
+      .eq("team", "ODA 2011"),
     supabase
       .from("soldiers")
       .select("*", { count: "exact", head: true })
@@ -93,18 +92,6 @@ export default async function Home() {
   const activeSquads = new Set((squadRows || []).map((s) => s.team)).size;
   const recruitmentStatus = (vacantBillets ?? 0) > 0 ? "OPEN" : "CLOSED";
 
-  // MilsimUnits ranking
-  let milsimRank: { rank: number; totalUnits: number; unitSlug: string } | null = null;
-  try {
-    const msuRes = await fetch(
-      "https://milsimunits.com/api/units/aae531d5-23eb-40b6-a66b-1a8c5f3335c2/embed?rankingType=overall",
-      { next: { revalidate: 3600 } },
-    );
-    if (msuRes.ok) {
-      const msuData = await msuRes.json();
-      milsimRank = { rank: msuData.rank, totalUnits: msuData.totalUnits, unitSlug: msuData.unitSlug };
-    }
-  } catch { /* silently degrade */ }
   return (
     <div style={{ backgroundColor: "#07090e", color: "#e8edf5" }}>
 
@@ -149,18 +136,18 @@ export default async function Home() {
             {/* Left — Copy Panel */}
             <div className="rounded-lg p-8" style={{ backgroundColor: "#0c0f17", border: "1px solid #161b27" }}>
               <p className="text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: "#4db6e0", fontFamily: "monospace" }}>
-                1ST PLT, A CO, 1/75TH RGR — SITREP
+                ODA 2011, 20TH SFG — SITREP
               </p>
               <h2 className="text-2xl font-black mb-3 leading-tight" style={{ color: "#e8edf5" }}>
-                Rangers Lead<br />
-                <span style={{ color: "#4db6e0" }}>The Way.</span>
+                De Oppresso Liber<br />
+                <span style={{ color: "#4db6e0" }}>Always Forward.</span>
               </h2>
               <div className="w-10 h-0.5 mb-5" style={{ backgroundColor: "#4db6e0" }} />
               <p className="text-sm leading-relaxed mb-4" style={{ color: "#8892a4" }}>
-                The Outlaws are a Bellum milsim community dedicated to the highest standards of military realism. We model our structure, tactics, and doctrine after the real-world 1st Battalion, 75th Ranger Regiment — one of the most elite light infantry units in the U.S. Army.
+                We are an Arma realism community built around ODA 2011 of the 20th Special Forces Group. Our structure, training, and missions emphasize small-team special operations and authentic teamwork.
               </p>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "#8892a4" }}>
-                Rangers complete RASP before assignment to a squad. Missions follow complete military doctrine — from intel briefs to after-action reviews.
+                ODA candidates complete selection and onboarding before assignment to the detachment. Missions follow complete military doctrine — from intel briefs to after-action reviews.
               </p>
               <Link href="/about"
                 className="inline-flex items-center gap-2 font-black text-xs tracking-widest uppercase px-6 py-3 rounded"
@@ -178,7 +165,7 @@ export default async function Home() {
               <div className="aspect-video">
                 <Image
                   src="/hero-bg.jpeg"
-                  alt="1/75th RGR Operations"
+                  alt="20th SFG Operations"
                   width={640}
                   height={360}
                   className="w-full h-full object-cover"
@@ -186,7 +173,7 @@ export default async function Home() {
               </div>
               <div className="p-5">
                 <h3 className="text-sm font-bold mb-1" style={{ color: "#e8edf5" }}>Operation Copper Strike</h3>
-                <p className="text-xs" style={{ color: "#505870" }}>HALO insertion deep into denied territory. 1st Platoon Outlaws execute a precision strike against high-value targets.</p>
+                <p className="text-xs" style={{ color: "#505870" }}>HALO insertion deep into denied territory. ODA 2011 execute a precision strike against high-value targets.</p>
               </div>
             </div>
 
@@ -198,8 +185,8 @@ export default async function Home() {
               </div>
               <div className="p-5 space-y-5">
                 {[
-                  { label: "Active Squads", value: String(activeSquads),          color: "#4ade80" },
-                  { label: "Total Rangers", value: String(totalRangers ?? 0),     color: "#e8edf5" },
+                  { label: "Active Elements", value: String(activeSquads),          color: "#4ade80" },
+                  { label: "Total Operators", value: String(totalOperators ?? 0),     color: "#e8edf5" },
                   { label: "Ops Completed", value: String(opsCompleted ?? 0),     color: "#e8edf5" },
                   { label: "Recruitment",   value: recruitmentStatus,             color: recruitmentStatus === "OPEN" ? "#4ade80" : "#f87171" },
                 ].map(({ label, value, color }) => (
@@ -228,7 +215,7 @@ export default async function Home() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-[10px] font-black tracking-[0.35em] uppercase mb-4" style={{ color: "#4db6e0" }}>Core Missions</p>
-            <h2 className="text-4xl font-black" style={{ color: "#e8edf5" }}>The Ranger Mission Set</h2>
+            <h2 className="text-4xl font-black" style={{ color: "#e8edf5" }}>The Special Forces Mission Set</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {CAPABILITIES.map(({ icon: Icon, title, body }) => (
@@ -354,119 +341,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── MILSIMUNITS RANKING ── */}
-      {milsimRank && (() => {
-        const percentile = Math.round((milsimRank.rank / milsimRank.totalUnits) * 100);
-        const profileUrl = `https://milsimunits.com/unit/1-75thrr`;
-        return (
-          <section className="px-6 py-12" style={{ backgroundColor: "#07090e", borderTop: "1px solid #161b27" }}>
-            <div className="max-w-7xl mx-auto">
-              <div
-                className="rounded-lg overflow-hidden"
-                style={{ backgroundColor: "#0c0f17", border: "1px solid #161b27" }}
-              >
-                {/* Header bar */}
-                <div
-                  className="px-6 py-3 flex items-center justify-between"
-                  style={{ borderBottom: "1px solid #161b27", backgroundColor: "rgba(77,182,224,0.03)" }}
-                >
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="w-3.5 h-3.5" style={{ color: "#4db6e0" }} />
-                    <span
-                      className="text-[10px] font-black tracking-[0.3em] uppercase"
-                      style={{ color: "#505870", fontFamily: "monospace" }}
-                    >
-                      MilsimUnits.com // Overall Community Ranking
-                    </span>
-                  </div>
-                  <a
-                    href={profileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[10px] font-black tracking-widest uppercase"
-                    style={{ color: "#4db6e0" }}
-                  >
-                    View Profile →
-                  </a>
-                </div>
-
-                {/* Stats row */}
-                <div className="grid grid-cols-3 divide-x" style={{ borderColor: "#161b27" }}>
-                  {/* Rank */}
-                  <div className="flex flex-col items-center justify-center py-8 gap-1">
-                    <span
-                      className="text-[10px] font-black tracking-[0.3em] uppercase mb-1"
-                      style={{ color: "#505870", fontFamily: "monospace" }}
-                    >
-                      Unit Rank
-                    </span>
-                    <span
-                      className="text-4xl md:text-5xl font-black leading-none"
-                      style={{ color: "#e8edf5" }}
-                    >
-                      <span style={{ color: "#4db6e0", fontSize: "0.6em" }}>#</span>
-                      {milsimRank.rank}
-                    </span>
-                  </div>
-
-                  {/* Total units */}
-                  <div className="flex flex-col items-center justify-center py-8 gap-1">
-                    <span
-                      className="text-[10px] font-black tracking-[0.3em] uppercase mb-1"
-                      style={{ color: "#505870", fontFamily: "monospace" }}
-                    >
-                      Total Units
-                    </span>
-                    <span
-                      className="text-4xl md:text-5xl font-black leading-none"
-                      style={{ color: "#e8edf5" }}
-                    >
-                      {milsimRank.totalUnits.toLocaleString()}
-                    </span>
-                  </div>
-
-                  {/* Percentile */}
-                  <div className="flex flex-col items-center justify-center py-8 gap-1">
-                    <span
-                      className="text-[10px] font-black tracking-[0.3em] uppercase mb-1"
-                      style={{ color: "#505870", fontFamily: "monospace" }}
-                    >
-                      Percentile
-                    </span>
-                    <span
-                      className="text-4xl md:text-5xl font-black leading-none"
-                      style={{ color: "#4ade80" }}
-                    >
-                      Top {percentile}%
-                    </span>
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div
-                  className="px-6 py-2.5 text-center"
-                  style={{ borderTop: "1px solid #161b27" }}
-                >
-                  <span
-                    className="text-[9px] tracking-[0.2em] uppercase"
-                    style={{ color: "#2e3650", fontFamily: "monospace" }}
-                  >
-                    Ranking updates hourly · Powered by MilsimUnits.com
-                  </span>
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      })()}
-
       {/* ── RECRUITMENT CTA ── */}
       <section className="py-24 px-6 relative overflow-hidden bg-black-mc grain"
         style={{ borderTop: "1px solid #161b27" }}>
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(7,9,14,0.45)" }} />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="flex justify-center mb-6">
-            <Image src="/logo-new.png" alt="1/75th RGR" width={72} height={72} className="opacity-75" />
+            <Image src="/logo-new.png" alt="20th SFG" width={72} height={72} className="opacity-75" />
           </div>
           <p className="text-[10px] font-black tracking-[0.35em] uppercase mb-4" style={{ color: "#4db6e0" }}>Recruitment Open</p>
           <h2 className="text-5xl font-black mb-4 leading-tight" style={{ color: "#e8edf5" }}>
@@ -480,7 +361,7 @@ export default async function Home() {
               { step: "01", title: "Join the Discord",   body: "Find us through the enlistment page and join the server." },
               { step: "02", title: "Introduce Yourself", body: "Drop an intro in the channel and get familiar with the unit." },
               { step: "03", title: "Short Onboarding",   body: "Go through a quick onboarding — no drawn-out gatekeeping." },
-              { step: "04", title: "Get Placed",         body: "Get assigned to a squad in 1st Platoon and start running ops." },
+              { step: "04", title: "Get Placed",         body: "Get assigned to an ODA billet and start running ops." },
             ].map(({ step, title, body }) => (
               <div key={step} className="rounded-lg p-5 relative overflow-hidden"
                 style={{ backgroundColor: "rgba(12,15,23,0.82)", border: "1px solid #161b27" }}>
@@ -501,7 +382,7 @@ export default async function Home() {
       {/* ── FOOTER ── */}
       <footer className="py-6 px-6 text-center" style={{ backgroundColor: "#07090e", borderTop: "1px solid #161b27" }}>
         <p className="text-[10px] tracking-[0.15em] uppercase" style={{ color: "#505870", fontFamily: "monospace" }}>
-          © 2026 1st Platoon, Alpha Company, 1/75th Ranger Regiment — Outlaws. All rights reserved.
+          © 2026 ODA 2011, 20th Special Forces Group. All rights reserved.
         </p>
       </footer>
 

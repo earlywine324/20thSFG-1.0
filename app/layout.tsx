@@ -10,7 +10,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "20th Special Forces Group | Bellum Unit",
+  title: "20th Special Forces Group | Arma Realism Unit",
   description:
     "20th Special Forces Group milsim community featuring ODA and special operations aviation structure.",
 };
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   </div>
                   <div>
                     <p className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>20th Special Forces Group</p>
-                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#8892a4" }}>Bellum Unit · ODA 2011</p>
+                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#8892a4" }}>Arma Realism Unit · ODA 2011</p>
                   </div>
                 </div>
                 <p className="text-xs leading-relaxed max-w-xs" style={{ color: "#8892a4" }}>
@@ -81,10 +81,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <div>
                 <p className="text-[10px] font-bold tracking-widest uppercase mb-3" style={{ color: "#8892a4" }}>Unit Info</p>
                 <ul className="space-y-2 text-xs" style={{ color: "#505870" }}>
-                  <li>Game: <span style={{ color: "#8892a4" }}>Bellum</span></li>
+                  <li>Game: <span style={{ color: "#8892a4" }}>Arma + others</span></li>
                   <li>Type: <span style={{ color: "#8892a4" }}>Milsim Realism</span></li>
                   <li>Modeled: <span style={{ color: "#8892a4" }}>20th SFG</span></li>
-                  <li>Region: <span style={{ color: "#8892a4" }}>Fort Moore, GA</span></li>
+                  <li>Platform: <span style={{ color: "#8892a4" }}>Arma + Other Games</span></li>
                   <li>Ops: <span style={{ color: "#8892a4" }}>Fri / Sat</span></li>
                 </ul>
               </div>
