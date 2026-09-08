@@ -100,7 +100,7 @@ export default async function Home() {
       <section className="border-y border-[#24231f] bg-[#0b0d10] px-6 py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <div className="relative min-h-[430px] overflow-hidden border border-[#2b2923]">
-            <Image src="/lionheart-hero.webp" alt="Fictional LIONHEART joint operations center" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+            <Image src="/lionheart-main.webp" alt="Fictional LIONHEART joint operations center" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#08090b] via-transparent to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-7">
               <p className="font-mono text-[9px] uppercase tracking-[.26em]" style={{ color: GOLD }}>Mission profile // Joint operations</p>
