@@ -108,7 +108,7 @@ export default function SoldierForm({
               {STATUSES.map((st) => <option key={st} value={st}>{st}</option>)}
             </select>
           </div>
-          <Field label="Unit *" name="unit" defaultValue={(s.unit as string) || prefill?.unit} required placeholder="20th Special Forces Group" />
+          <Field label="Unit *" name="unit" defaultValue={(s.unit as string) || prefill?.unit} required placeholder="Interagency Special Missions Group" />
           <Field label="Team" name="team" defaultValue={(s.team as string) || prefill?.team} placeholder="1st Squad" />
         </div>
       </Section>

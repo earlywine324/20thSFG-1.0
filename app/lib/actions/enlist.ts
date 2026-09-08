@@ -118,7 +118,7 @@ export async function submitApplication(formData: FormData): Promise<EnlistResul
             { name: "Availability",  value: availStr,                                       inline: false },
             { name: "Motivation",    value: (application.motivation ?? "").slice(0, 300) + ((application.motivation?.length ?? 0) > 300 ? "…" : ""), inline: false },
           ],
-          footer: { text: "ODA 2011, 20th SFG Recruiting" },
+          footer: { text: "ISMG LIONHEART Candidate Screening" },
           timestamp: new Date().toISOString(),
           ...(inserted?.id ? { url: adminUrl } : {}),
         },

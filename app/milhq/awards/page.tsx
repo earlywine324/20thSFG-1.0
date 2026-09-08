@@ -26,8 +26,8 @@ const AWARDS: { category: string; subtitle: string; items: UnitAward[] }[] = [
         name: "Distinguished Service Cross",
         image: "/insignia/awards/Army-Distinguished-Service-Cross-DSC-69a02199e744d.png",
         tier: "valor",
-        description: "The highest award for valor within the 20th SFG. Awarded for extraordinary heroism in combat operations. The recipient must have demonstrated actions above and beyond the call of duty that directly impacted mission success under enemy fire.",
-        criteria: ["Extraordinary heroism in direct combat", "Actions above and beyond the call of duty", "Eyewitness accounts required", "Nomination by ODA commander, approved by Group CO"],
+        description: "The highest award for valor within ISMG. Awarded for extraordinary action during a LIONHEART operation that directly affects mission success under extreme conditions.",
+        criteria: ["Extraordinary action during an operation", "Actions above and beyond assigned duties", "Witness accounts required", "Nomination by element lead and approval by program command"],
       },
       {
         name: "Silver Star",
@@ -585,7 +585,7 @@ export default function AwardsPage() {
           </div>
           <h1 className="text-5xl font-black mb-4" style={{ color: "#e8e4d8" }}>Awards & Decorations</h1>
           <p className="max-w-xl leading-relaxed" style={{ color: "#8a8870" }}>
-            Awards, decorations, badges, and devices authorized by the 20th Special Forces Group (Airborne). Soldiers may be nominated by their chain of command for recognition of service, achievement, and valor.
+            Awards, decorations, badges, and devices authorized by the LIONHEART Program. Personnel may be nominated by their element leadership for service, achievement, and valor.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
             {Object.entries(TIER_COLORS).map(([tier, color]) => (

@@ -345,7 +345,7 @@ export default function TerminalGate({ onComplete }: { onComplete: () => void })
             AUDIO: {audioArmed ? "ARMED" : "ARM"}
           </p>
           <h1 className="text-lg font-black tracking-widest uppercase leading-snug" style={{ color: "#e8edf5", fontFamily: "monospace" }}>
-            INITIALIZING 20TH SFG<br />
+            INITIALIZING LIONHEART<br />
             <span style={{ color: "#4db6e0" }}>ENLISTMENT INTERFACE</span>
           </h1>
           <p className="text-xs mt-2 leading-relaxed" style={{ color: "#505870", fontFamily: "monospace" }}>
@@ -409,7 +409,7 @@ export default function TerminalGate({ onComplete }: { onComplete: () => void })
         {/* Node ID */}
         <div className="mt-4 text-center">
           <span className="text-[9px] tracking-[0.2em] uppercase" style={{ color: "#2e3650", fontFamily: "monospace" }}>
-            NODE&nbsp;&nbsp;20SFG-ODA2011&nbsp;&nbsp;·&nbsp;&nbsp;ODA 2011 · ARMA
+            NODE&nbsp;&nbsp;ISMG-LH01&nbsp;&nbsp;·&nbsp;&nbsp;LIONHEART · ARMA
           </span>
         </div>
       </div>

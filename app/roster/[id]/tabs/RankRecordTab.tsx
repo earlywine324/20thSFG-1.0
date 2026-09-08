@@ -36,7 +36,7 @@ export default function RankRecordTab({
             { name: "rank", label: "Rank Abbreviation", required: true, placeholder: "e.g. SGT" },
             { name: "rankFull", label: "Full Rank Title", required: true, placeholder: "e.g. Sergeant" },
             { name: "date", label: "Date", required: true, placeholder: "e.g. 13 APR 2026" },
-            { name: "authority", label: "Authority", placeholder: "e.g. Commander, 20th SFG" },
+            { name: "authority", label: "Authority", placeholder: "e.g. LIONHEART Program Director" },
           ]}
           onSubmit={addRankRecord}
           onRemove={removeRankRecord}

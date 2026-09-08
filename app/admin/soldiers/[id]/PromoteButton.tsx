@@ -22,7 +22,6 @@ export default function PromoteButton({
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
-  const [selectedRank, setSelectedRank] = useState("");
 
   const eligibility = checkEligibility(currentRank, lastPromotion ?? null);
   const isInAutoChain = AUTO_PROMOTION_CHAIN.some((r) => r.abbr === currentRank && r.nextRank !== null);

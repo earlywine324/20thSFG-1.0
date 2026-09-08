@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
-import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import TerminalGate from "./components/TerminalGate";
 import EnlistForm from "./components/EnlistForm";
@@ -116,7 +115,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
               className="text-[10px] font-black tracking-[0.4em] uppercase mb-4"
               style={{ color: "#4db6e0", fontFamily: "monospace" }}
             >
-              ODA 2011 · 20th Special Forces Group
+              Interagency Special Missions Group
             </p>
 
             {/* Title */}
@@ -134,7 +133,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
                 className="text-[9px] tracking-[0.3em] uppercase"
                 style={{ color: "#505870", fontFamily: "monospace" }}
               >
-                ODA 2011 · ARMA
+                LIONHEART · ARMA
               </span>
               <div className="w-16 h-px" style={{ backgroundColor: "#161b27" }} />
             </div>
@@ -144,7 +143,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
               className="text-sm leading-relaxed mb-3 mx-auto max-w-lg"
               style={{ color: "#8892a4" }}
             >
-              We are an Arma realism unit modeled around ODA 2011, 20th Special Forces Group.
+              We are an Arma realism unit built around the fictional ISMG LIONHEART Program.
               We use authentic roles, teamwork, and mission planning while keeping the community
               welcoming and enjoyable. Members also play other games together.
             </p>
@@ -230,7 +229,7 @@ export default function EnlistClientPage({ openBillets }: { openBillets: OpenBil
               className="text-[9px] tracking-[0.3em] uppercase mt-10"
               style={{ color: "#2e3650", fontFamily: "monospace" }}
             >
-              ODA 2011, 20TH SFG — RECRUITMENT CELL OVERSIGHT
+              ISMG, LIONHEART PROGRAM — CANDIDATE SCREENING
               <br />
               <span style={{ color: "#1e2535" }}>
                 ENTRY IS A PRIVILEGE, NOT A GUARANTEE

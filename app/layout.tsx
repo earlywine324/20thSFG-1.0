@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
@@ -10,9 +11,9 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "20th Special Forces Group | Arma Realism Unit",
+  title: "ISMG | LIONHEART Program",
   description:
-    "20th Special Forces Group milsim community featuring ODA and special operations aviation structure.",
+    "The fictional Interagency Special Missions Group LIONHEART Program, an Arma realism community built around intelligence, investigations, interdiction, and direct action.",
 };
 
 async function AdminBar() {
@@ -38,31 +39,26 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         {/* Footer */}
         <footer style={{ borderTop: "1px solid #161b27", backgroundColor: "#07090e" }}>
-          {/* Blue accent stripe */}
+          {/* LIONHEART accent stripe */}
           <div style={{
             height: "2px",
-            background: "linear-gradient(90deg, #07090e 0%, rgba(77,182,224,0.2) 20%, #4db6e0 50%, rgba(77,182,224,0.2) 80%, #07090e 100%)"
+            background: "linear-gradient(90deg, #07090e 0%, rgba(201,166,90,0.2) 20%, #c9a65a 50%, rgba(201,166,90,0.2) 80%, #07090e 100%)"
           }} />
           <div className="max-w-7xl mx-auto px-6 py-10">
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div className="md:col-span-2">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{
-                    border: "2px solid rgba(77,182,224,0.35)",
-                    background: "radial-gradient(circle, #0c0f17, #07090e)",
-                  }}>
-                    <span className="text-xs font-black" style={{ color: "#4db6e0" }}>20</span>
-                  </div>
+                  <Image src="/lionheart-emblem.webp" alt="LIONHEART emblem" width={44} height={44} className="h-11 w-11 object-contain" />
                   <div>
-                    <p className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>20th Special Forces Group</p>
-                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#8892a4" }}>Arma Realism Unit · ODA 2011</p>
+                    <p className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>Interagency Special Missions Group</p>
+                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#8892a4" }}>LIONHEART Program · Arma Realism</p>
                   </div>
                 </div>
                 <p className="text-xs leading-relaxed max-w-xs" style={{ color: "#8892a4" }}>
-                  A milsim unit organized around an Operational Detachment Alpha and supporting special operations aviation crew.
+                  A fictional realism unit combining intelligence, federal investigations, counternarcotics, and special missions.
                 </p>
-                <p className="text-xs font-bold tracking-widest uppercase mt-3 italic" style={{ color: "#4db6e0" }}>
-                  &quot;De Oppresso Liber&quot;
+                <p className="text-xs font-bold tracking-widest uppercase mt-3 italic" style={{ color: "#c9a65a" }}>
+                  &quot;One Mission. Every Authority.&quot;
                 </p>
               </div>
               <div>
@@ -71,7 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   {["Home", "About", "Roster", "Operations", "Enlist"].map((item) => (
                     <li key={item}>
                       <a href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                        className="text-xs transition-colors hover:text-[#4db6e0]" style={{ color: "#505870" }}>
+                        className="text-xs transition-colors hover:text-[#c9a65a]" style={{ color: "#505870" }}>
                         {item}
                       </a>
                     </li>
@@ -83,7 +79,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <ul className="space-y-2 text-xs" style={{ color: "#505870" }}>
                   <li>Game: <span style={{ color: "#8892a4" }}>Arma + others</span></li>
                   <li>Type: <span style={{ color: "#8892a4" }}>Milsim Realism</span></li>
-                  <li>Modeled: <span style={{ color: "#8892a4" }}>20th SFG</span></li>
+                  <li>Program: <span style={{ color: "#8892a4" }}>LIONHEART</span></li>
                   <li>Platform: <span style={{ color: "#8892a4" }}>Arma + Other Games</span></li>
                   <li>Ops: <span style={{ color: "#8892a4" }}>Fri / Sat</span></li>
                 </ul>
@@ -92,10 +88,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-3"
               style={{ borderTop: "1px solid #161b27" }}>
               <p className="text-xs" style={{ color: "#505870" }}>
-                © 2026 20th Special Forces Group community. Not affiliated with the U.S. Army.
+                © 2026 Interagency Special Missions Group community.
               </p>
               <p className="text-xs" style={{ color: "#505870" }}>
-                Fictional gaming community for entertainment purposes only.
+                Fictional gaming community. Not affiliated with any government agency or military organization.
               </p>
             </div>
           </div>

@@ -38,16 +38,28 @@ function buildGroups(soldiers: Soldier[]): BilletGroup[] {
 
   const groups: BilletGroup[] = [
     {
-      title: "ODA 2011",
-      subtitle: "20th Special Forces Group",
-      color: "#c9a128",
-      billets: pick((s) => s.unit === "20th Special Forces Group" && s.team === "ODA 2011"),
+      title: "Special Activities Division",
+      subtitle: "Intelligence & Covert Action",
+      color: "#c9a65a",
+      billets: pick((s) => s.unit === "Interagency Special Missions Group" && s.team === "Special Activities Division"),
     },
     {
-      title: "MH-60M Crew 1",
-      subtitle: "160th SOAR (A)",
-      color: "#a78bfa",
-      billets: pick((s) => s.unit === "160th SOAR (A)" && s.team === "MH-60M Crew 1"),
+      title: "Federal Operations Division",
+      subtitle: "Investigations & Crisis Response",
+      color: "#8da5b8",
+      billets: pick((s) => s.unit === "Interagency Special Missions Group" && s.team === "Federal Operations Division"),
+    },
+    {
+      title: "Narcotics Operations Division",
+      subtitle: "Trafficking & Interdiction",
+      color: "#8fa86c",
+      billets: pick((s) => s.unit === "Interagency Special Missions Group" && s.team === "Narcotics Operations Division"),
+    },
+    {
+      title: "Special Missions Squadron",
+      subtitle: "Direct Action & Hostage Rescue",
+      color: "#a94d46",
+      billets: pick((s) => s.unit === "Interagency Special Missions Group" && s.team === "Special Missions Squadron"),
     },
     {
       title: "Administrative",
@@ -56,10 +68,10 @@ function buildGroups(soldiers: Soldier[]): BilletGroup[] {
       billets: pick((s) => s.unit === "Administrative"),
     },
     {
-      title: "Selection Pipeline",
+      title: "LIONHEART Selection",
       subtitle: "Candidates",
       color: "#f59e0b",
-      billets: pick((s) => s.unit === "Selection Pipeline"),
+      billets: pick((s) => s.unit === "LIONHEART Selection"),
     },
   ];
 

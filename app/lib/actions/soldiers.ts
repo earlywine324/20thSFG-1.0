@@ -108,7 +108,7 @@ export async function assignSoldierToBillet(soldierId: string, billetId: string)
   } else {
     // ── Primary unit billet ──
     // Recreate old billet as vacant — but never for selection or training pipelines
-    const noVacantUnits = ["USAJFKSWCS", "Selection Pipeline"];
+    const noVacantUnits = ["Training Division", "LIONHEART Selection"];
     if (soldier.status === "ACTIVE DUTY" && !noVacantUnits.includes(soldier.unit)) {
       const oldBilletId = `vacant-${soldier.role.toLowerCase().replace(/[^a-z0-9]/g, "-")}-${Date.now().toString(36)}`;
       await supabase.from("soldiers").insert({
@@ -213,7 +213,7 @@ export async function promoteSoldier(id: string, newRank: string, authority: str
       recipientUserId: updated.user_id,
       type: "promotion",
       title: `Promoted to ${newRankFull}`,
-      body: `Congratulations, ${updated.name}. You have been promoted to ${newRankFull} (${newRank}) effective ${dateStr}. De Oppresso Liber.`,
+      body: `Congratulations, ${updated.name}. You have been promoted to ${newRankFull} (${newRank}) effective ${dateStr}. One Mission. Every Authority.`,
     });
   }
 
@@ -309,7 +309,7 @@ export async function dischargeSoldier(id: string, reason: string = "Honorable D
   if (error) return { error: error.message };
 
   // Create a vacant billet for their old position (skip training pipelines)
-  const noVacantUnits = ["USAJFKSWCS", "Selection Pipeline", "Administrative"];
+  const noVacantUnits = ["Training Division", "LIONHEART Selection", "Administrative"];
   if (soldier.status === "ACTIVE DUTY" && !noVacantUnits.includes(soldier.unit)) {
     const vacantId = `vacant-${soldier.role.toLowerCase().replace(/[^a-z0-9]/g, "-")}-${Date.now().toString(36)}`;
     await supabase.from("soldiers").insert({
@@ -338,7 +338,7 @@ export async function dischargeSoldier(id: string, reason: string = "Honorable D
       recipientUserId: soldier.user_id,
       type: "message",
       title: "You have been discharged",
-      body: `${soldier.name}, you have been released from the unit effective ${dateStr}. Reason: ${reason}. Thank you for your service. De Oppresso Liber.`,
+      body: `${soldier.name}, you have been released from the unit effective ${dateStr}. Reason: ${reason}. Thank you for your service.`,
     });
   }
 

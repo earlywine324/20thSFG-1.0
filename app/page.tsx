@@ -1,391 +1,158 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Shield, Crosshair, Radio,
-  Globe, Zap, BookOpen, ArrowRight, MapPin, Users, } from "lucide-react";
+import { ArrowRight, BadgeCheck, Crosshair, Eye, FlaskConical, Gavel, MapPin } from "lucide-react";
 import HeroSection from "./components/HeroSection";
 import { createClient } from "@/app/lib/supabase/server";
 
-const UNIT_CARDS = [
-  { icon: Shield, title: "Special Operations", desc: "Direct Action" },
-  { icon: Crosshair, title: "Strike & Raid", desc: "Precision Raids" },
-  { icon: Globe, title: "Special Recon", desc: "Deep Infiltration" },
-  { icon: Radio, title: "Personnel Recovery", desc: "CSAR & EXFIL" },
-  { icon: Zap, title: "HALO / HAHO", desc: "Military Freefall" },
+const GOLD = "#c9a65a";
+
+const ELEMENTS = [
+  { code: "SAD", title: "Special Activities Division", subtitle: "Intelligence & covert action", icon: Eye, body: "Human intelligence, surveillance, asset handling, special reconnaissance, and low-visibility operations." },
+  { code: "FOD", title: "Federal Operations Division", subtitle: "Investigations & crisis response", icon: Gavel, body: "Counterterrorism cases, technical surveillance, evidence exploitation, warrants, and hostage response." },
+  { code: "NOD", title: "Narcotics Operations Division", subtitle: "Cartel & interdiction operations", icon: FlaskConical, body: "Undercover investigations, trafficking-network disruption, interdiction, and partner-force operations." },
+  { code: "SMS", title: "Special Missions Squadron", subtitle: "National-level direct action", icon: Crosshair, body: "Precision raids, hostage rescue, high-value target capture, and sensitive-site exploitation." },
 ];
 
-const CAPABILITIES = [
-  { icon: Crosshair, title: "Direct Action", body: "Precision raids against HVTs and key terrain. Fast-rope insertions, CQB, and time-sensitive strike missions." },
-  { icon: Globe, title: "Special Reconnaissance", body: "Long-range patrol, OP establishment, and battle damage assessment deep behind enemy lines." },
-  { icon: Radio, title: "Personnel Recovery", body: "CSAR and EXFIL of isolated personnel. The team does not leave anyone behind." },
-  { icon: BookOpen, title: "Airfield Seizure", body: "Rapid seizure of enemy airfields to enable follow-on forces. A core special operations capability." },
-  { icon: Zap, title: "HALO / HAHO Infiltration", body: "Military freefall enabling covert high-altitude infiltration into denied or austere environments." },
-  { icon: Shield, title: "Urban Assault", body: "Close-quarters battle, building clearance, and urban terrain dominance at speed and under fire." },
+const MISSIONS = [
+  "Counterterrorism",
+  "Clandestine collection",
+  "Hostage rescue",
+  "Counternarcotics",
+  "Sensitive-site exploitation",
+  "Personnel recovery",
 ];
 
 type CompletedOp = {
   id: string;
   title: string;
-  type: string;
   event_date: string;
   theatre: string | null;
   element: string | null;
   result: string | null;
-  kia: number;
-  wia: number;
-  summary: string | null;
   op_number: string | null;
 };
 
-function formatOpDate(iso: string): string {
-  const d = new Date(iso);
-  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  return `${String(d.getUTCDate()).padStart(2,"0")} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+function displayDate(value: string) {
+  return new Intl.DateTimeFormat("en-US", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(value)).toUpperCase();
 }
-
-const TYPE_COLOR: Record<string, string> = {
-  "FTX / Operation": "text-red-400",
-  "Squad Drill":     "text-amber-400",
-  "Selection Training":   "text-blue-400",
-  "Course / School": "text-green-400",
-  "Ceremony":        "text-purple-400",
-};
 
 export default async function Home() {
   const supabase = await createClient();
-
-  const [
-    { data },
-    { count: totalOperators },
-    { count: opsCompleted },
-    { data: squadRows },
-    { count: vacantBillets },
-  ] = await Promise.all([
-    supabase
-      .from("events")
-      .select("id, title, type, event_date, theatre, element, result, kia, wia, summary, op_number")
-      .eq("status", "COMPLETED")
-      .order("event_date", { ascending: false })
-      .limit(5),
-    supabase
-      .from("soldiers")
-      .select("*", { count: "exact", head: true })
-      .eq("status", "ACTIVE DUTY")
-      .neq("unit", "Selection Pipeline"),
-    supabase
-      .from("events")
-      .select("*", { count: "exact", head: true })
-      .eq("status", "COMPLETED"),
-    supabase
-      .from("soldiers")
-      .select("team")
-      .eq("status", "ACTIVE DUTY")
-      .eq("unit", "20th Special Forces Group")
-      .eq("team", "ODA 2011"),
-    supabase
-      .from("soldiers")
-      .select("*", { count: "exact", head: true })
-      .eq("status", "VACANT"),
+  const [{ data }, { count: assigned }, { count: billets }, { count: completed }] = await Promise.all([
+    supabase.from("events").select("id,title,event_date,theatre,element,result,op_number").eq("status", "COMPLETED").order("event_date", { ascending: false }).limit(4),
+    supabase.from("soldiers").select("*", { count: "exact", head: true }).eq("status", "ACTIVE DUTY").neq("unit", "LIONHEART Selection"),
+    supabase.from("soldiers").select("*", { count: "exact", head: true }).eq("status", "VACANT"),
+    supabase.from("events").select("*", { count: "exact", head: true }).eq("status", "COMPLETED"),
   ]);
-
-  const recentOps: CompletedOp[] = data || [];
-  const activeSquads = new Set((squadRows || []).map((s) => s.team)).size;
-  const recruitmentStatus = (vacantBillets ?? 0) > 0 ? "OPEN" : "CLOSED";
+  const recentOps = (data || []) as CompletedOp[];
+  const recruiting = (billets || 0) > 0;
 
   return (
-    <div style={{ backgroundColor: "#07090e", color: "#e8edf5" }}>
-
-      {/* ── HERO ── */}
+    <div className="bg-[#070809] text-[#eee8dc]">
       <HeroSection />
 
-      {/* ── UNIT CARDS STRIP ── */}
-      <section className="relative" style={{ backgroundColor: "#0c0f17", borderBottom: "1px solid #161b27" }}>
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.035]" style={{
-          backgroundImage: "linear-gradient(#4db6e0 1px, transparent 1px), linear-gradient(90deg, #4db6e0 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }} />
-        <div className="relative max-w-7xl mx-auto px-6 py-14">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            {UNIT_CARDS.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex flex-col items-center text-center gap-3 py-4">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: "rgba(77,182,224,0.08)", border: "1px solid rgba(77,182,224,0.18)" }}>
-                  <Icon className="w-5 h-5" style={{ color: "#4db6e0" }} />
-                </div>
-                <h3 className="text-xs font-black tracking-widest uppercase" style={{ color: "#e8edf5" }}>{title}</h3>
-                <p className="text-[10px] tracking-wider uppercase" style={{ color: "#505870" }}>{desc}</p>
-              </div>
-            ))}
-          </div>
+      <section className="border-y border-[#c9a65a]/15 bg-[#0b0d10]">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-[#c9a65a]/10 px-6 md:grid-cols-4">
+          {[
+            ["Program", "LIONHEART"],
+            ["Assigned personnel", String(assigned || 0)],
+            ["Operations logged", String(completed || 0)],
+            ["Recruitment", recruiting ? "OPEN" : "CLOSED"],
+          ].map(([label, value]) => (
+            <div key={label} className="px-5 py-7 text-center">
+              <p className="font-mono text-[9px] uppercase tracking-[.25em] text-[#706a5f]">{label}</p>
+              <p className="mt-2 text-sm font-black uppercase tracking-[.14em]" style={{ color: value === "OPEN" ? "#6ecb84" : GOLD }}>{value}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── THREE-COLUMN CONTENT GRID ── */}
-      <section style={{ backgroundColor: "#07090e" }}>
-        {/* Classification strip */}
-        <div className="px-6 py-2" style={{ backgroundColor: "rgba(77,182,224,0.04)", borderBottom: "1px solid #161b27" }}>
-          <div className="max-w-7xl mx-auto">
-            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#505870", fontFamily: "monospace" }}>
-              OPERATIONAL BRIEFING — FOR PUBLIC DISSEMINATION
-            </span>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Left — Copy Panel */}
-            <div className="rounded-lg p-8" style={{ backgroundColor: "#0c0f17", border: "1px solid #161b27" }}>
-              <p className="text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: "#4db6e0", fontFamily: "monospace" }}>
-                ODA 2011, 20TH SFG — SITREP
-              </p>
-              <h2 className="text-2xl font-black mb-3 leading-tight" style={{ color: "#e8edf5" }}>
-                De Oppresso Liber<br />
-                <span style={{ color: "#4db6e0" }}>Always Forward.</span>
-              </h2>
-              <div className="w-10 h-0.5 mb-5" style={{ backgroundColor: "#4db6e0" }} />
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#8892a4" }}>
-                We are an Arma realism community built around ODA 2011 of the 20th Special Forces Group. Our structure, training, and missions emphasize small-team special operations and authentic teamwork.
-              </p>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: "#8892a4" }}>
-                ODA candidates complete selection and onboarding before assignment to the detachment. Missions follow complete military doctrine — from intel briefs to after-action reviews.
-              </p>
-              <Link href="/about"
-                className="inline-flex items-center gap-2 font-black text-xs tracking-widest uppercase px-6 py-3 rounded"
-                style={{ backgroundColor: "#161b27", color: "#e8edf5", border: "1px solid #1e2535" }}>
-                Read Our History <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
-
-            {/* Center — Media Panel */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0c0f17", border: "1px solid #161b27" }}>
-              <div className="px-5 py-3 flex items-center gap-2" style={{ borderBottom: "1px solid #161b27" }}>
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#4db6e0" }} />
-                <span className="text-[10px] font-black tracking-widest uppercase" style={{ color: "#8892a4" }}>Unit Media</span>
-              </div>
-              <div className="aspect-video">
-                <Image
-                  src="/hero-bg.jpeg"
-                  alt="20th SFG Operations"
-                  width={640}
-                  height={360}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-sm font-bold mb-1" style={{ color: "#e8edf5" }}>Operation Copper Strike</h3>
-                <p className="text-xs" style={{ color: "#505870" }}>HALO insertion deep into denied territory. ODA 2011 execute a precision strike against high-value targets.</p>
-              </div>
-            </div>
-
-            {/* Right — Info Box */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0c0f17", border: "1px solid #161b27" }}>
-              <div className="px-5 py-3 flex items-center gap-2" style={{ borderBottom: "1px solid #161b27" }}>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#4db6e0" }} />
-                <span className="text-[10px] font-black tracking-widest uppercase" style={{ color: "#8892a4" }}>Unit Status</span>
-              </div>
-              <div className="p-5 space-y-5">
-                {[
-                  { label: "Active Elements", value: String(activeSquads),          color: "#4ade80" },
-                  { label: "Total Operators", value: String(totalOperators ?? 0),     color: "#e8edf5" },
-                  { label: "Ops Completed", value: String(opsCompleted ?? 0),     color: "#e8edf5" },
-                  { label: "Recruitment",   value: recruitmentStatus,             color: recruitmentStatus === "OPEN" ? "#4ade80" : "#f87171" },
-                ].map(({ label, value, color }) => (
-                  <div key={label} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid #161b27" }}>
-                    <span className="text-[10px] font-black tracking-widest uppercase" style={{ color: "#505870" }}>{label}</span>
-                    <span className="text-sm font-black" style={{ color }}>{value}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="px-5 py-4 text-center" style={{ borderTop: "1px solid #161b27", backgroundColor: "rgba(77,182,224,0.04)" }}>
-                <Link href="/enlist"
-                  className="text-xs font-black tracking-widest uppercase"
-                  style={{ color: "#4db6e0" }}>
-                  Submit Enlistment Application →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CAPABILITIES ── */}
-      <section className="py-24 px-6 relative overflow-hidden bg-mc grain"
-        style={{ borderTop: "1px solid #161b27", borderBottom: "1px solid #161b27" }}>
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(7,9,14,0.58)" }} />
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="text-[10px] font-black tracking-[0.35em] uppercase mb-4" style={{ color: "#4db6e0" }}>Core Missions</p>
-            <h2 className="text-4xl font-black" style={{ color: "#e8edf5" }}>The Special Forces Mission Set</h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {CAPABILITIES.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="rounded-lg p-6"
-                style={{ backgroundColor: "rgba(12,15,23,0.85)", border: "1px solid #161b27" }}>
-                <div className="w-10 h-10 rounded flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "rgba(77,182,224,0.08)", border: "1px solid rgba(77,182,224,0.18)" }}>
-                  <Icon className="w-5 h-5" style={{ color: "#4db6e0" }} />
-                </div>
-                <h3 className="font-bold text-sm mb-2" style={{ color: "#e8edf5" }}>{title}</h3>
-                <p className="text-xs leading-relaxed" style={{ color: "#8892a4" }}>{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── OPERATIONS LOG ── */}
-      <section className="py-24 px-6" style={{ backgroundColor: "#07090e" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-10 gap-4">
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <div>
-              <p className="text-[10px] font-black tracking-[0.35em] uppercase mb-3" style={{ color: "#4db6e0" }}>After-Action Reports</p>
-              <h2 className="text-4xl font-black" style={{ color: "#e8edf5" }}>Operational History</h2>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[.34em]" style={{ color: GOLD }}>Interagency task organization</p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">Four disciplines.<br />One mission group.</h2>
             </div>
-            <Link href="/operations" className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#8892a4" }}>
-              Full Log →
-            </Link>
+            <p className="max-w-2xl text-sm leading-7 text-[#969083]">
+              ISMG combines the investigative depth of a federal task force, the reach of an intelligence service,
+              the focus of a counternarcotics unit, and the precision of a special mission unit. LIONHEART turns those
+              capabilities into one connected Arma campaign experience.
+            </p>
           </div>
 
-          {recentOps.length === 0 ? (
-            <div className="rounded-lg p-10 text-center" style={{ backgroundColor: "#0c0f17", border: "1px dashed #161b27" }}>
-              <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "#2e3650" }}>
-                No completed operations on record yet
-              </p>
-            </div>
-          ) : (
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0c0f17", border: "1px solid #161b27" }}>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr style={{ borderBottom: "1px solid #161b27" }}>
-                      {["Op #", "Name", "Type", "Date", "Theatre", "Element", "Result", "Casualties"].map((h) => (
-                        <th key={h} className="text-[10px] font-black tracking-widest uppercase text-left px-5 py-3"
-                          style={{ color: "#505870" }}>
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentOps.map((op) => (
-                      <tr key={op.id} className="transition-colors hover:bg-[#0b0e15]"
-                        style={{ borderBottom: "1px solid #161b27" }}>
-                        <td className="px-5 py-4">
-                          <span className="text-[10px] font-black tracking-wider px-2 py-0.5 rounded"
-                            style={{ color: "#4db6e0", backgroundColor: "rgba(77,182,224,0.08)" }}>
-                            {op.op_number ?? "—"}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4">
-                          <p className="text-xs font-bold" style={{ color: "#e8edf5" }}>{op.title}</p>
-                          {op.summary && (
-                            <p className="text-[10px] mt-0.5 leading-relaxed max-w-xs" style={{ color: "#505870" }}>
-                              {op.summary}
-                            </p>
-                          )}
-                        </td>
-                        <td className="px-5 py-4">
-                          <span className={`text-[10px] font-bold tracking-wider ${TYPE_COLOR[op.type] ?? "text-[#8892a4]"}`}>
-                            {op.type}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4 whitespace-nowrap text-xs" style={{ color: "#8892a4" }}>
-                          {formatOpDate(op.event_date)}
-                        </td>
-                        <td className="px-5 py-4">
-                          {op.theatre ? (
-                            <span className="flex items-center gap-1 text-xs" style={{ color: "#8892a4" }}>
-                              <MapPin className="w-3 h-3" /> {op.theatre}
-                            </span>
-                          ) : (
-                            <span className="text-xs" style={{ color: "#2e3650" }}>—</span>
-                          )}
-                        </td>
-                        <td className="px-5 py-4">
-                          {op.element ? (
-                            <span className="flex items-center gap-1 text-xs" style={{ color: "#8892a4" }}>
-                              <Users className="w-3 h-3" /> {op.element}
-                            </span>
-                          ) : (
-                            <span className="text-xs" style={{ color: "#2e3650" }}>—</span>
-                          )}
-                        </td>
-                        <td className="px-5 py-4">
-                          <span className={`text-[10px] font-black tracking-wider ${
-                            op.result === "SUCCESS"   ? "text-green-400" :
-                            op.result === "FAILED"    ? "text-red-400"   :
-                            op.result === "COMPLETED" ? "text-green-400" :
-                                                        "text-[#505870]"
-                          }`}>
-                            {op.result ?? "—"}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4 text-xs">
-                          <span className="text-red-400">{op.kia ?? 0} KIA</span>
-                          <span className="mx-1" style={{ color: "#2e3650" }}>/</span>
-                          <span className="text-amber-400">{op.wia ?? 0} WIA</span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="px-5 py-3 text-right" style={{ borderTop: "1px solid #161b27" }}>
-                <Link href="/operations" className="text-[10px] font-black tracking-widest uppercase"
-                  style={{ color: "#4db6e0" }}>
-                  View Full Operational History →
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── RECRUITMENT CTA ── */}
-      <section className="py-24 px-6 relative overflow-hidden bg-black-mc grain"
-        style={{ borderTop: "1px solid #161b27" }}>
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(7,9,14,0.45)" }} />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <Image src="/logo-new.png" alt="20th SFG" width={72} height={72} className="opacity-75" />
-          </div>
-          <p className="text-[10px] font-black tracking-[0.35em] uppercase mb-4" style={{ color: "#4db6e0" }}>Recruitment Open</p>
-          <h2 className="text-5xl font-black mb-4 leading-tight" style={{ color: "#e8edf5" }}>
-            Think You Have<br /><span style={{ color: "#4db6e0" }}>What It Takes?</span>
-          </h2>
-          <p className="max-w-xl mx-auto mb-10 leading-relaxed text-sm" style={{ color: "#8892a4" }}>
-            No long, drawn-out process. If you have the right mindset, you&apos;ll fit right in.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 text-left">
-            {[
-              { step: "01", title: "Join the Discord",   body: "Find us through the enlistment page and join the server." },
-              { step: "02", title: "Introduce Yourself", body: "Drop an intro in the channel and get familiar with the unit." },
-              { step: "03", title: "Short Onboarding",   body: "Go through a quick onboarding — no drawn-out gatekeeping." },
-              { step: "04", title: "Get Placed",         body: "Get assigned to an ODA billet and start running ops." },
-            ].map(({ step, title, body }) => (
-              <div key={step} className="rounded-lg p-5 relative overflow-hidden"
-                style={{ backgroundColor: "rgba(12,15,23,0.82)", border: "1px solid #161b27" }}>
-                <span className="absolute top-2 right-3 font-black" style={{ fontSize: "5rem", color: "rgba(77,182,224,0.05)", lineHeight: 1 }}>{step}</span>
-                <h3 className="relative font-bold text-sm mb-2" style={{ color: "#e8edf5" }}>{title}</h3>
-                <p className="relative text-xs leading-relaxed" style={{ color: "#8892a4" }}>{body}</p>
-              </div>
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {ELEMENTS.map(({ code, title, subtitle, icon: Icon, body }) => (
+              <article key={code} className="group border border-[#24231f] bg-[#0c0e11] p-7 transition hover:border-[#c9a65a]/45">
+                <div className="flex items-start justify-between gap-5">
+                  <div className="flex h-11 w-11 items-center justify-center border border-[#c9a65a]/25 bg-[#c9a65a]/[.06]" style={{ color: GOLD }}><Icon className="h-5 w-5" /></div>
+                  <span className="font-mono text-[10px] font-black tracking-[.24em] text-[#59554d]">{code}</span>
+                </div>
+                <h3 className="mt-6 text-lg font-black">{title}</h3>
+                <p className="mt-1 font-mono text-[9px] uppercase tracking-[.2em]" style={{ color: GOLD }}>{subtitle}</p>
+                <p className="mt-4 text-sm leading-6 text-[#8f897d]">{body}</p>
+              </article>
             ))}
           </div>
-          <Link href="/enlist"
-            className="inline-flex items-center gap-3 font-black text-sm tracking-widest uppercase px-10 py-4 rounded"
-            style={{ backgroundColor: "#111827", color: "#4db6e0", border: "1px solid rgba(77,182,224,0.35)", boxShadow: "0 4px 24px rgba(77,182,224,0.12)" }}>
-            Begin Enlistment Process <ArrowRight className="w-4 h-4" />
-          </Link>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="py-6 px-6 text-center" style={{ backgroundColor: "#07090e", borderTop: "1px solid #161b27" }}>
-        <p className="text-[10px] tracking-[0.15em] uppercase" style={{ color: "#505870", fontFamily: "monospace" }}>
-          © 2026 ODA 2011, 20th Special Forces Group. All rights reserved.
-        </p>
-      </footer>
+      <section className="border-y border-[#24231f] bg-[#0b0d10] px-6 py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
+          <div className="relative min-h-[430px] overflow-hidden border border-[#2b2923]">
+            <Image src="/lionheart-hero.webp" alt="Fictional LIONHEART joint operations center" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#08090b] via-transparent to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-7">
+              <p className="font-mono text-[9px] uppercase tracking-[.26em]" style={{ color: GOLD }}>Mission profile // Joint operations</p>
+              <p className="mt-2 max-w-md text-sm leading-6 text-[#b7b0a2]">Intelligence drives the operation. Investigators build the target. Tactical elements finish the mission.</p>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[.34em]" style={{ color: GOLD }}>Operational mandate</p>
+            <h2 className="mt-4 text-4xl font-black">Built for connected campaigns.</h2>
+            <p className="mt-5 text-sm leading-7 text-[#969083]">Members are not limited to one style of play. A case can begin with surveillance, develop into an undercover investigation, and end with a coordinated assault or extraction.</p>
+            <div className="mt-8 grid grid-cols-2 gap-3">
+              {MISSIONS.map((mission) => (
+                <div key={mission} className="flex items-center gap-3 border border-[#24231f] bg-[#080a0c] px-4 py-3 text-xs font-bold text-[#bbb3a4]">
+                  <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: GOLD }} /> {mission}
+                </div>
+              ))}
+            </div>
+            <Link href="/about" className="mt-8 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[.2em]" style={{ color: GOLD }}>View program brief <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+        </div>
+      </section>
 
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div><p className="font-mono text-[10px] font-bold uppercase tracking-[.34em]" style={{ color: GOLD }}>Sanitized archive</p><h2 className="mt-3 text-4xl font-black">Mission log</h2></div>
+            <Link href="/operations" className="text-xs font-black uppercase tracking-[.18em] text-[#918a7d] hover:text-[#c9a65a]">Open full archive →</Link>
+          </div>
+          <div className="mt-9 overflow-hidden border border-[#24231f] bg-[#0b0d10]">
+            {recentOps.length ? recentOps.map((op) => (
+              <div key={op.id} className="grid gap-4 border-b border-[#24231f] px-6 py-5 last:border-0 md:grid-cols-[110px_1fr_180px_120px] md:items-center">
+                <span className="font-mono text-[10px] font-bold" style={{ color: GOLD }}>{op.op_number || "PENDING"}</span>
+                <div><p className="text-sm font-black">{op.title}</p><p className="mt-1 flex items-center gap-1 text-[10px] text-[#6f6a5f]"><MapPin className="h-3 w-3" />{op.theatre || "REDACTED"}</p></div>
+                <span className="text-xs text-[#918a7d]">{op.element || "Joint task element"}</span>
+                <span className="font-mono text-[10px] text-[#6f6a5f]">{displayDate(op.event_date)}</span>
+              </div>
+            )) : <div className="px-6 py-12 text-center font-mono text-[10px] uppercase tracking-[.22em] text-[#5e5a52]">No sanitized mission records released</div>}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#c9a65a]/15 bg-[radial-gradient(circle_at_50%_0%,rgba(201,166,90,.10),transparent_42%)] px-6 py-24 text-center">
+        <Image src="/lionheart-emblem.webp" alt="LIONHEART emblem" width={92} height={92} className="mx-auto" />
+        <p className="mt-6 font-mono text-[10px] font-bold uppercase tracking-[.34em]" style={{ color: GOLD }}>Candidate screening active</p>
+        <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-black md:text-5xl">Your first assignment starts here.</h2>
+        <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#969083]">We want dependable players who communicate, learn, and contribute. Prior military or milsim experience is not required.</p>
+        <Link href="/enlist" className="mt-8 inline-flex items-center gap-2 bg-[#c9a65a] px-8 py-4 text-xs font-black uppercase tracking-[.2em] text-[#090a0c]">Apply to LIONHEART <ArrowRight className="h-4 w-4" /></Link>
+      </section>
+
+      <div className="border-t border-[#24231f] px-6 py-4 text-center font-mono text-[9px] uppercase tracking-[.2em] text-[#4e4b45]">
+        Fictional gaming organization // Not affiliated with any government agency or military organization
+      </div>
     </div>
   );
 }

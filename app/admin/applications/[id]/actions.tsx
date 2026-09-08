@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { approveApplication, denyApplication } from "@/app/lib/actions/applications";
 import { CheckCircle, XCircle } from "lucide-react";
 
@@ -39,8 +40,8 @@ export default function ApplicationActions({ id }: { id: string }) {
         <div className="p-4 rounded" style={{ backgroundColor: "rgba(74,222,128,0.08)", border: "1px solid rgba(74,222,128,0.2)" }}>
           <p className="text-sm font-bold mb-1" style={{ color: "#4ade80" }}>Application Approved</p>
           <p className="text-xs" style={{ color: "#8a8870" }}>
-            Soldier profile created and assigned to <strong style={{ color: "#e8e4d8" }}>USAJFKSWCS — Initial Entry Training (IET)</strong>.
-            Go to <a href="/admin/soldiers" className="underline" style={{ color: "#c9a128" }}>Roster Management</a> to assign them to a billet.
+            Candidate profile created in <strong style={{ color: "#e8e4d8" }}>LIONHEART Selection</strong>.
+            Go to <Link href="/admin/soldiers" className="underline" style={{ color: "#c9a128" }}>Roster Management</Link> to assign them to a billet.
           </p>
         </div>
       ) : showDeny ? (

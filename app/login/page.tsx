@@ -70,7 +70,7 @@ function LoginForm() {
           className="text-[9px] tracking-[0.15em] uppercase hidden md:block"
           style={{ color: "#505870", fontFamily: "monospace" }}
         >
-          20TH SFG — RGRNET ACCESS TERMINAL
+          ISMG — LIONHEART ACCESS TERMINAL
         </span>
       </div>
 
@@ -89,8 +89,8 @@ function LoginForm() {
                 }}
               >
                 <Image
-                  src="/logo-new.png"
-                  alt="20th SFG"
+                  src="/lionheart-emblem.webp"
+                  alt="LIONHEART"
                   width={72}
                   height={72}
                   style={{
@@ -105,19 +105,19 @@ function LoginForm() {
               className="text-[9px] tracking-[0.3em] uppercase mb-2"
               style={{ color: "#4db6e0", fontFamily: "monospace" }}
             >
-              RGRNET v1.75 // SECURE SESSION
+              LIONHEART NET // SECURE SESSION
             </p>
             <h1
               className="text-xl font-black tracking-widest uppercase mb-2"
               style={{ color: "#e8edf5", fontFamily: "monospace" }}
             >
-              ODA NETWORK LOGIN
+              PROGRAM NETWORK LOGIN
             </h1>
             <p
               className="text-[10px] tracking-[0.15em] uppercase"
               style={{ color: "#505870", fontFamily: "monospace" }}
             >
-              ODA 2011 · 20th Special Forces Group
+              Interagency Special Missions Group
             </p>
 
             <div className="flex items-center justify-center gap-3 mt-5">
@@ -126,7 +126,7 @@ function LoginForm() {
                 className="text-[8px] tracking-[0.2em] uppercase"
                 style={{ color: "#2e3650", fontFamily: "monospace" }}
               >
-                ODA 2011 · ARMA
+                LIONHEART · ARMA
               </span>
               <div className="w-10 h-px" style={{ backgroundColor: "#161b27" }} />
             </div>
@@ -312,7 +312,7 @@ function LoginForm() {
           className="text-[9px] tracking-[0.2em] uppercase"
           style={{ color: "#1e2535", fontFamily: "monospace" }}
         >
-          ODA 2011, 20TH SPECIAL FORCES GROUP — ODA 2011 · ARMA · EST 2026
+          INTERAGENCY SPECIAL MISSIONS GROUP — LIONHEART PROGRAM · ARMA · EST 2026
         </p>
       </div>
     </div>

@@ -31,7 +31,7 @@ export default function AdminNav() {
           </span>
         </div>
         <p className="text-[10px] tracking-wider uppercase" style={{ color: "#6b6a58", fontFamily: "monospace" }}>
-          RGRNET // RESTRICTED
+          LIONHEART // RESTRICTED
         </p>
       </div>
 

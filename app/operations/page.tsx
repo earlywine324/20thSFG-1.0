@@ -45,23 +45,15 @@ function currentMonthLabel(): string {
 const TYPE_COLORS: Record<string, string> = {
   "FTX / Operation": "text-red-400 bg-red-400/10",
   "Squad Drill":     "text-amber-400 bg-amber-400/10",
-  "Selection Training":   "text-blue-400 bg-blue-400/10",
+  "Candidate Training":   "text-blue-400 bg-blue-400/10",
   "Course / School": "text-green-400 bg-green-400/10",
   "Ceremony":        "text-purple-400 bg-purple-400/10",
-};
-
-const TYPE_DOT: Record<string, string> = {
-  "FTX / Operation": "bg-red-400",
-  "Squad Drill":     "bg-amber-400",
-  "Selection Training":   "bg-blue-400",
-  "Course / School": "bg-green-400",
-  "Ceremony":        "bg-purple-400",
 };
 
 const EVENT_TYPES = [
   { color: "bg-red-400",    label: "FTX / Operation" },
   { color: "bg-amber-400",  label: "Squad Drill" },
-  { color: "bg-blue-400",   label: "Selection Training" },
+  { color: "bg-blue-400",   label: "Candidate Training" },
   { color: "bg-green-400",  label: "Course / School" },
   { color: "bg-purple-400", label: "Ceremony" },
 ];
@@ -114,7 +106,7 @@ export default async function OperationsPage() {
           </p>
           <h1 className="text-5xl font-black text-[#e8e4d8] mb-4">Operations & Training</h1>
           <p className="text-[#8a8870] max-w-xl leading-relaxed">
-            Upcoming operations, training events, and historical mission log for 1st Platoon, A Co, 20th SFG.
+            Upcoming operations, training events, and sanitized mission history for the LIONHEART Program.
           </p>
           <div className="flex flex-wrap gap-4 mt-8">
             {[

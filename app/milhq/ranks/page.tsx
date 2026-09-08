@@ -15,45 +15,45 @@ type Rank = {
 const ENLISTED: Rank[] = [
   {
     grade: "E-1", abbr: "PVT", title: "Private", image: "/insignia/ranks/E1-PVT-69a12d80c6a4e.png",
-    description: "Entry-level rank for Operators entering the selection pipeline. Privates are in initial training and have no leadership responsibilities. They focus on meeting the physical and tactical standards required to earn a place in the detachment.",
-    requirements: ["Complete enlistment application", "Pass initial screening", "Begin selection training pipeline"],
+    description: "Entry-level grade for candidates entering LIONHEART screening. Candidates focus on communications, tactical fundamentals, and the standards required for an operational assignment.",
+    requirements: ["Complete program application", "Pass initial screening", "Begin candidate training"],
   },
   {
     grade: "E-2", abbr: "PV2", title: "Private Second Class", image: "/insignia/ranks/E2-PV2-6999ba19e286b.png",
-    description: "Awarded upon successful completion of selection. PV2s have earned their place in the detachment and are beginning to prove themselves as Operators. They execute assigned tasks and focus on mastering individual soldier skills.",
+    description: "Awarded after successful completion of screening. New members begin proving themselves within an operational element and focus on mastering individual skills.",
     requirements: ["Complete selection", "Minimum 30 days time in service", "Squad leader recommendation"],
   },
   {
     grade: "E-3", abbr: "PFC", title: "Private First Class", image: "/insignia/ranks/E3-PFC-69b67ad12756e.png",
-    description: "An experienced junior Operator who has demonstrated dedication and competence in the detachment. PFCs assist in training newer members, contribute to ODA team operations, and continue to develop their individual skills.",
+    description: "An experienced junior operator who contributes reliably to element missions, assists newer members, and continues developing individual skills.",
     requirements: ["Minimum 60 days as PV2", "Demonstrated MOS proficiency", "Participation in at least 2 FTX operations"],
   },
   {
     grade: "E-4", abbr: "SPC", title: "Specialist", image: "/insignia/ranks/E4-SPC-69b67ad8ccce6.png",
-    description: "A qualified Operator and subject matter expert in their MOS. Specialists are the backbone of the ODA team, executing missions with skill and reliability. They are fully trusted operators with proven performance in the detachment.",
+    description: "A qualified operator and subject-matter specialist. Specialists execute LIONHEART missions with skill, judgment, and consistent reliability.",
     requirements: ["Minimum 90 days as PFC", "MOS qualification complete", "Minimum 4 FTX operations attended", "Team leader recommendation"],
   },
   {
     grade: "E-4", abbr: "CPL", title: "Corporal", image: "/insignia/ranks/E4X-CPL-69b67ae206ef4.png",
     description: "The first NCO rank in the unit. Corporals lead a buddy team and hold direct authority over junior enlisted Operators. They are responsible for the training, welfare, and discipline of their soldiers during operations.",
-    requirements: ["Current SPC or equivalent", "Demonstrated leadership in the ODA team", "Squad leader recommendation", "Leadership evaluation board"],
+    requirements: ["Current SPC or equivalent", "Demonstrated element leadership", "Team lead recommendation", "Leadership evaluation board"],
   },
 ];
 
 const NCO: Rank[] = [
   {
     grade: "E-5", abbr: "SGT", title: "Sergeant", image: "/insignia/ranks/E5-SGT-6999b9cc6474e.png",
-    description: "A Fire Team Leader — one of the most critical leadership positions in a Special Forces detachment. Sergeants lead a 4-man ODA team in all operations, making immediate tactical decisions under fire. They are the primary link between the Team Leader and individual Operators.",
-    requirements: ["Minimum 90 days as CPL", "Demonstrated ODA team leadership", "Minimum 6 FTX operations attended", "Passed NCO evaluation board"],
+    description: "A team leader responsible for a small operational cell. Sergeants make immediate tactical decisions and connect element leadership with individual operators.",
+    requirements: ["Minimum 90 days as CPL", "Demonstrated team leadership", "Minimum 6 operations attended", "Passed leadership evaluation"],
   },
   {
     grade: "E-6", abbr: "SSG", title: "Staff Sergeant", image: "/insignia/ranks/E6-SSG-6999b9b952f93.png",
-    description: "The Team Leader — responsible for leading a 9-man ODA team. Staff Sergeants plan and execute squad-level operations, manage their soldiers' welfare and training, and are the primary tactical leaders during direct action missions. There are three SSG Team Leader billets in ODA 2011.",
+    description: "An experienced operational team leader who plans missions, develops personnel, and leads tactical execution across LIONHEART assignments.",
     requirements: ["Minimum 120 days as SGT", "Operator Tab earned", "Demonstrated team leadership", "Minimum 10 operations attended", "Operations Sergeant recommendation"],
   },
   {
     grade: "E-7", abbr: "SFC", title: "Sergeant First Class", image: "/insignia/ranks/E7-SFC-6999b9a7c5144.png",
-    description: "The Operations Sergeant — the most senior NCO in ODA 2011 and the right hand of the Detachment Commander. The SFC is responsible for all enlisted matters, platoon readiness, training standards, and mission execution. In the unit, the Operations Sergeant is the tactical backbone of the unit.",
+    description: "A senior operations leader responsible for element readiness, training standards, personnel development, and mission execution.",
     requirements: ["Minimum 180 days as SSG", "Successful tour as Team Leader", "Operator Tab and Airborne qualification", "Detachment Commander recommendation"],
   },
   {
@@ -63,7 +63,7 @@ const NCO: Rank[] = [
   },
   {
     grade: "E-8", abbr: "1SG", title: "Operations Sergeant", image: "/insignia/ranks/E8X-1SG-6999b918e1887.png",
-    description: "The senior enlisted leader — the senior enlisted leader of ODA 2011 and principal advisor to the Detachment Commander on all enlisted matters. The 1SG owns company discipline, welfare, training standards, and administrative readiness. In the unit, the Operations Sergeant is the backbone of company-level leadership.",
+    description: "The senior enlisted leader and principal advisor to program command on personnel, standards, readiness, and operational discipline.",
     requirements: ["Minimum 240 days as SFC", "Proven record as Operations Sergeant", "Selected over MSG by detachment commander", "Battalion commander approval"],
   },
   {
@@ -86,12 +86,12 @@ const OFFICER: Rank[] = [
   },
   {
     grade: "O-2", abbr: "1LT", title: "First Lieutenant", image: "/insignia/ranks/O2-1LT-6999b55b25615.png",
-    description: "The Detachment Commander of ODA 2011 — the primary commissioned officer responsible for planning, leading, and accounting for all Operators in the detachment. The 1LT works in direct partnership with the Operations Sergeant (SFC) to execute the detachment commander's intent. This is the most important officer billet in a Special Forces detachment.",
+    description: "An element commander responsible for planning, leading, and accounting for assigned personnel while working directly with senior operations staff.",
     requirements: ["Minimum 180 days as 2LT or direct appointment", "Operator Tab", "Demonstrated platoon-level leadership", "Detachment Commander selection"],
   },
   {
     grade: "O-3", abbr: "CPT", title: "Captain", image: "/insignia/ranks/O3-CPT-6999b54675e25.png",
-    description: "The Detachment Commander of ODA 2011. The Captain is responsible for the overall readiness, training, discipline, and operations of the company. In the unit, CPTs are highly experienced combat leaders who have proven themselves through multiple platoon-level deployments.",
+    description: "A division or squadron commander responsible for readiness, training, discipline, and operational performance within LIONHEART.",
     requirements: ["Minimum 240 days as 1LT", "Successful platoon command tour", "Operator Tab and Airborne qualification", "Battalion commander selection"],
   },
   {
@@ -101,7 +101,7 @@ const OFFICER: Rank[] = [
   },
   {
     grade: "O-5", abbr: "LTC", title: "Lieutenant Colonel", image: "/insignia/ranks/O5-LTC-6999b470e637c.png",
-    description: "The Group Commander — commanding the 20th Special Forces Group. The LTC has full command authority and responsibility for all training, readiness, and operations of the battalion. In the unit, the Group Commander leads one of the most elite light infantry units in the U.S. Army.",
+    description: "The LIONHEART Program Director, holding overall responsibility for training, readiness, personnel, and operations across ISMG.",
     requirements: ["Minimum 360 days as MAJ", "Battalion-level staff and command experience", "Regimental commander recommendation"],
   },
   {
@@ -192,7 +192,7 @@ export default function RanksPage() {
           </div>
           <h1 className="text-5xl font-black mb-4" style={{ color: "#e8e4d8" }}>Rank Structure</h1>
           <p className="max-w-xl leading-relaxed" style={{ color: "#8a8870" }}>
-            Complete rank structure for ODA 2011, 20th Special Forces Group. Ranks follow U.S. Army conventions adapted for our Arma realism unit.
+            Complete grade structure for the LIONHEART Program. Military-style grades are adapted for leadership and progression within our Arma realism unit.
           </p>
 
           {/* Key billets callout */}

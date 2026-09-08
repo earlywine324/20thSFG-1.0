@@ -35,7 +35,7 @@ interface Placed {
 interface TF { x: number; y: number; scale: number }
 
 const UNITS: ToolDef[] = [
-  { id: 'rng-sqd', label: 'Special Forces Team',   team: 'friendly', category: 'unit' },
+  { id: 'ismg-team', label: 'Special Missions Team', team: 'friendly', category: 'unit' },
   { id: 'chalk-a', label: 'Chalk Alpha',     team: 'friendly', category: 'unit' },
   { id: 'chalk-b', label: 'Chalk Bravo',     team: 'friendly', category: 'unit' },
   { id: 'cmd',     label: 'Command Element', team: 'friendly', category: 'unit' },
@@ -65,42 +65,44 @@ const IC = {
   white:  '#f1f5f9',
 }
 
-function ToolIcon({ id, size = 32 }: { id: string; size?: number }) {
-  const s  = size
-  const rh = Math.round(s * 0.68)
-
-  const InfBox = ({ children }: { children?: ReactNode }) => (
-    <svg width={s} height={rh} viewBox="0 0 40 27" fill="none">
+function InfBox({ children, size }: { children?: ReactNode; size: number }) {
+  const height = Math.round(size * 0.68)
+  return (
+    <svg width={size} height={height} viewBox="0 0 40 27" fill="none">
       <rect x="1.5" y="2" width="37" height="23" stroke={IC.blue} strokeWidth="2.5" />
       {children}
       <circle cx="20" cy="2" r="3.5" fill={IC.blue} />
     </svg>
   )
+}
+
+function ToolIcon({ id, size = 32 }: { id: string; size?: number }) {
+  const s  = size
 
   switch (id) {
-    case 'rng-sqd': return (
-      <InfBox>
+    case 'ismg-team': return (
+      <InfBox size={s}>
         <line x1="1.5" y1="2" x2="38.5" y2="25" stroke={IC.blue} strokeWidth="2" />
         <line x1="38.5" y1="2" x2="1.5" y2="25" stroke={IC.blue} strokeWidth="2" />
       </InfBox>
     )
     case 'chalk-a': return (
-      <InfBox>
+      <InfBox size={s}>
         <text x="20" y="19" textAnchor="middle" fill={IC.blue} fontSize="14" fontFamily="monospace" fontWeight="bold">A</text>
       </InfBox>
     )
     case 'chalk-b': return (
-      <InfBox>
+      <InfBox size={s}>
         <text x="20" y="19" textAnchor="middle" fill={IC.blue} fontSize="14" fontFamily="monospace" fontWeight="bold">B</text>
       </InfBox>
     )
     case 'cmd': return (
-      <InfBox>
+      <InfBox size={s}>
         <text x="20" y="18" textAnchor="middle" fill={IC.blue} fontSize="10" fontFamily="monospace" fontWeight="bold">CMD</text>
       </InfBox>
     )
     case 'wpns': return (
-      <InfBox>
+      <InfBox size={s}>
         <text x="20" y="18" textAnchor="middle" fill={IC.blue} fontSize="10" fontFamily="monospace" fontWeight="bold">WPN</text>
       </InfBox>
     )

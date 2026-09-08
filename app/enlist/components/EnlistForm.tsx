@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { submitApplication, type EnlistResult } from "@/app/lib/actions/enlist";
 import { ArrowRight, CheckCircle, ChevronRight, Crosshair } from "lucide-react";
 import type { OpenBillet } from "@/app/enlist/EnlistClientPage";
@@ -76,13 +77,13 @@ export default function EnlistForm({ openBillets }: { openBillets: OpenBillet[] 
             RESPONSE TIME: 48–72 HOURS VIA DISCORD
           </p>
           <div className="mt-8">
-            <a
+            <Link
               href="/"
               className="text-[10px] font-black tracking-widest uppercase"
               style={{ color: "#4db6e0" }}
             >
               ← Return to Home
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -411,7 +412,7 @@ export default function EnlistForm({ openBillets }: { openBillets: OpenBillet[] 
           <div className="space-y-5">
             <div>
               <label className="block text-[10px] font-black tracking-widest uppercase mb-2" style={{ color: "#505870" }}>
-                Why do you want to join ODA 2011 (20th SFG)? <span style={{ color: "#4db6e0" }}>*</span>
+                Why do you want to join the LIONHEART Program? <span style={{ color: "#4db6e0" }}>*</span>
               </label>
               <textarea
                 name="motivation"
@@ -446,7 +447,7 @@ export default function EnlistForm({ openBillets }: { openBillets: OpenBillet[] 
             <ChevronRight className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: "#4db6e0" }} />
             <p className="text-xs leading-relaxed" style={{ color: "#505870" }}>
               By submitting this application you acknowledge that entry is selective, that you
-              will be required to complete selection and onboarding before ODA assignment, and that you agree to
+              will be required to complete screening and onboarding before receiving an operational assignment, and that you agree to
               operate under the unit&#39;s chain of command and standards of conduct.
             </p>
           </div>

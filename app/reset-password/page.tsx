@@ -80,7 +80,7 @@ export default function ResetPasswordPage() {
           className="text-[9px] tracking-[0.15em] uppercase hidden md:block"
           style={{ color: "#505870", fontFamily: "monospace" }}
         >
-          20TH SFG — RGRNET ACCESS TERMINAL
+          ISMG — LIONHEART ACCESS TERMINAL
         </span>
       </div>
 
@@ -99,8 +99,8 @@ export default function ResetPasswordPage() {
                 }}
               >
                 <Image
-                  src="/logo-new.png"
-                  alt="20th SFG"
+                  src="/lionheart-emblem.webp"
+                  alt="LIONHEART"
                   width={64}
                   height={64}
                   style={{
@@ -114,7 +114,7 @@ export default function ResetPasswordPage() {
               className="text-[9px] tracking-[0.3em] uppercase mb-2"
               style={{ color: "#4db6e0", fontFamily: "monospace" }}
             >
-              RGRNET // CREDENTIAL UPDATE
+              LIONHEART NET // CREDENTIAL UPDATE
             </p>
             <h1
               className="text-xl font-black tracking-widest uppercase mb-2"
@@ -288,7 +288,7 @@ export default function ResetPasswordPage() {
           className="text-[9px] tracking-[0.2em] uppercase"
           style={{ color: "#1e2535", fontFamily: "monospace" }}
         >
-          ODA 2011, 20TH SPECIAL FORCES GROUP — ODA 2011 · ARMA · EST 2026
+          INTERAGENCY SPECIAL MISSIONS GROUP — LIONHEART PROGRAM · ARMA · EST 2026
         </p>
       </div>
     </div>

@@ -123,7 +123,7 @@ export default async function NewsPage() {
                 Unit News
               </h1>
               <p className="text-[#8892a4] text-sm leading-relaxed max-w-lg">
-                SITREPs, AARs, announcements, and operational updates from ODA 2011, 20th Special Forces Group.
+                Sanitized mission reports, announcements, and program updates from ISMG LIONHEART.
               </p>
             </div>
             {admin && (
@@ -222,7 +222,7 @@ export default async function NewsPage() {
         style={{ borderTop: "1px solid #161b27" }}
       >
         <p className="text-[9px] tracking-[0.3em] uppercase" style={{ color: "#2e3650", fontFamily: "monospace" }}>
-          ODA 2011 · 20TH SFG // ALL INFORMATION UNCLASSIFIED // PUBLIC RELEASE AUTHORIZED
+          ISMG · LIONHEART PROGRAM // SANITIZED FOR PUBLIC RELEASE
         </p>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Shield, Star } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/app/lib/supabase/server";
 import { checkAdmin } from "@/app/lib/dal";
 import { getRankImage } from "@/app/lib/rank-images";

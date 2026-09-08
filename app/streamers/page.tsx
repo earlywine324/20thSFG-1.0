@@ -497,7 +497,7 @@ export default async function StreamersPage() {
               </span>
               <span className="w-px h-3" style={{ backgroundColor: "rgba(239,68,68,0.3)" }} />
               <span className="text-[9px] tracking-[0.2em] uppercase" style={{ color: "#505870", fontFamily: "monospace" }}>
-                1st PLT · A CO · 20th SFG
+                ISMG · LIONHEART PROGRAM
               </span>
             </div>
 
@@ -513,7 +513,7 @@ export default async function StreamersPage() {
               className="text-sm max-w-md mb-8"
               style={{ color: "#505870" }}
             >
-              Watch members of ODA 2011 live on Twitch. Support the unit — follow, subscribe, tune in.
+              Watch LIONHEART members live on Twitch. Support the community, follow, subscribe, and tune in.
             </p>
 
             {/* Stats row */}

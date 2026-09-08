@@ -103,7 +103,7 @@ export async function addAwardRecord(soldierId: string, formData: FormData) {
         recipientUserId: soldier.user_id,
         type: "award",
         title: `Award: ${name}`,
-        body: `${soldier.name}, you have been awarded the ${name} effective ${dateAwarded}.${citation ? ` Citation: ${citation}` : ""} De Oppresso Liber.`,
+        body: `${soldier.name}, you have been awarded the ${name} effective ${dateAwarded}.${citation ? ` Citation: ${citation}` : ""} One Mission. Every Authority.`,
       });
     }
   }
@@ -217,7 +217,7 @@ export async function addQualificationRecord(soldierId: string, formData: FormDa
           recipientUserId: soldier.user_id,
           type: "qualification",
           title: `Qualification Awarded: ${qualification}`,
-          body: `${soldier.name}, you have been awarded the ${qualification} qualification effective ${date}. De Oppresso Liber.`,
+          body: `${soldier.name}, you have been awarded the ${qualification} qualification effective ${date}. One Mission. Every Authority.`,
         });
       }
     }

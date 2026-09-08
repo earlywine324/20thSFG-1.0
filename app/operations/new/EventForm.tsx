@@ -8,7 +8,7 @@ import { Calendar, Clock, Target, Users, Radio, MapPin, FileText, ChevronLeft } 
 const EVENT_TYPES = [
   "FTX / Operation",
   "Squad Drill",
-  "Selection Training",
+  "Candidate Training",
   "Course / School",
   "Ceremony",
 ] as const;

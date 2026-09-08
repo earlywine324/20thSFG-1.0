@@ -33,8 +33,8 @@ export default function AssignmentRecordTab({
           soldierId={soldierId}
           label="Assignment"
           fields={[
-            { name: "position", label: "Position", required: true, placeholder: "e.g. ODA-201 Commander" },
-            { name: "unit", label: "Unit", required: true, placeholder: "e.g. 1st Battalion, 20th SFG" },
+            { name: "position", label: "Position", required: true, placeholder: "e.g. Special Activities Officer" },
+            { name: "unit", label: "Unit", required: true, placeholder: "e.g. Interagency Special Missions Group" },
             { name: "dateFrom", label: "From Date", required: true, placeholder: "e.g. 13 APR 2026" },
             { name: "dateTo", label: "To Date (blank = current)", placeholder: "Leave empty if current" },
           ]}

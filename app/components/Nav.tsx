@@ -82,12 +82,6 @@ export default function Nav() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // Close dropdown on route change
-  useEffect(() => {
-    setMilhqOpen(false);
-    setMenuOpen(false);
-  }, [pathname]);
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50" style={{
       borderBottom: "1px solid #161b27",
@@ -97,28 +91,28 @@ export default function Nav() {
         radial-gradient(ellipse 30% 100% at 100% 50%, #0c1020 0%, transparent 100%)
       `,
     }}>
-      {/* Blue accent top stripe */}
+      {/* LIONHEART accent top stripe */}
       <div style={{
         height: "2px",
-        background: "linear-gradient(90deg, #07090e 0%, rgba(77,182,224,0.2) 20%, #4db6e0 50%, rgba(77,182,224,0.2) 80%, #07090e 100%)"
+        background: "linear-gradient(90deg, #07090e 0%, rgba(201,166,90,0.2) 20%, #c9a65a 50%, rgba(201,166,90,0.2) 80%, #07090e 100%)"
       }} />
 
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <Image
-            src="/logo-new.png"
-            alt="20th Special Forces Group Logo"
-            width={36}
-            height={36}
+            src="/lionheart-emblem.webp"
+            alt="LIONHEART emblem"
+            width={42}
+            height={42}
             className="shrink-0 drop-shadow-lg"
             style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.5))" }}
           />
           <div className="flex flex-col leading-none">
             <span className="font-black text-sm tracking-widest uppercase" style={{ color: "#e8edf5" }}>
-              20<span style={{ color: "#4db6e0" }}>th</span> SFG
+              IS<span style={{ color: "#c9a65a" }}>MG</span>
             </span>
-            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8892a4" }}>ODA 2011 · Arma</span>
+            <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8892a4" }}>LIONHEART · Arma</span>
           </div>
         </Link>
 
@@ -188,7 +182,7 @@ export default function Nav() {
 
         {/* CTA + Auth */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Vote */}
+          {/* Application shortcut */}
           <a
             href="/enlist"
             target="_blank"
@@ -203,7 +197,7 @@ export default function Nav() {
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "rgba(251,191,36,0.08)"; }}
           >
             <ChevronUp className="w-3.5 h-3.5" />
-            Vote
+            Apply
           </a>
 
           {/* Discord */}
@@ -265,7 +259,7 @@ export default function Nav() {
                 boxShadow: "0 0 12px rgba(77,182,224,0.1)",
               }}
             >
-              Enlist Now
+              Join LIONHEART
             </Link>
           )}
         </div>
@@ -363,7 +357,7 @@ export default function Nav() {
             </Link>
           )}
 
-          {/* Vote — mobile */}
+          {/* Application shortcut — mobile */}
           <a
             href="/enlist"
             target="_blank"
@@ -373,7 +367,7 @@ export default function Nav() {
             style={{ backgroundColor: "rgba(251,191,36,0.08)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.3)" }}
           >
             <ChevronUp className="w-4 h-4" />
-            Join ODA 2011
+            Apply to LIONHEART
           </a>
 
           <a
@@ -397,7 +391,7 @@ export default function Nav() {
               className="mt-2 text-center text-xs font-black tracking-widest uppercase px-5 py-3 rounded"
               style={{ backgroundColor: "#111827", color: "#4db6e0", border: "1px solid rgba(77,182,224,0.35)" }}
             >
-              Enlist Now
+              Join LIONHEART
             </Link>
           )}
         </div>

@@ -29,7 +29,7 @@ export async function approveApplication(id: string) {
 
   if (error) return { error: error.message };
 
-  // Auto-create a candidate profile in the selection pipeline
+  // Auto-create a candidate profile in the LIONHEART screening pipeline
   const soldierId = `rct-${app.callsign.toLowerCase().replace(/[^a-z0-9]/g, "-")}-${Date.now().toString(36)}`;
   const now = new Date();
   const enlistDate = `${now.getDate().toString().padStart(2, "0")} ${["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][now.getMonth()]} ${now.getFullYear()}`;
@@ -41,10 +41,10 @@ export async function approveApplication(id: string) {
     name: app.callsign,
     callsign: app.callsign,
     mos: app.mos_preference === "any" ? "11X" : app.mos_preference,
-    mos_title: app.mos_preference === "any" ? "Special Forces Candidate" : getMosTitle(app.mos_preference),
-    role: "Special Forces Candidate",
-    unit: "Selection Pipeline",
-    team: "ODA Selection",
+    mos_title: app.mos_preference === "any" ? "LIONHEART Candidate" : getMosTitle(app.mos_preference),
+    role: "LIONHEART Candidate",
+    unit: "LIONHEART Selection",
+    team: "Candidate Screening",
     status: "ACTIVE DUTY",
     enlist_date: enlistDate,
     time_in_service: "0 days",
@@ -55,9 +55,9 @@ export async function approveApplication(id: string) {
     timezone: app.timezone,
     last_active: enlistDate,
     awards: [],
-    service_record: [{ date: enlistDate, event: "Enlisted", details: `Accepted into the ODA 2011 selection pipeline, 20th Special Forces Group.` }],
+    service_record: [{ date: enlistDate, event: "Accepted", details: "Accepted into LIONHEART candidate screening, Interagency Special Missions Group." }],
     rank_history: [{ rank: "PVT", rankFull: "Private", date: enlistDate, authority: "Enlistment" }],
-    assignment_history: [{ position: "Special Forces Candidate", unit: "Selection Pipeline", dateFrom: enlistDate }],
+    assignment_history: [{ position: "LIONHEART Candidate", unit: "LIONHEART Selection", dateFrom: enlistDate }],
   });
 
   if (soldierError) {
@@ -70,7 +70,7 @@ export async function approveApplication(id: string) {
     const assignResult = await assignSoldierToBillet(soldierId, app.billet_id);
     if (assignResult.error) {
       console.error("Auto-assign to billet failed:", assignResult.error);
-      // Non-fatal: candidate remains in the selection pipeline as fallback
+      // Non-fatal: candidate remains in LIONHEART screening as fallback
     }
   }
 
@@ -84,13 +84,13 @@ export async function approveApplication(id: string) {
 function getMosTitle(mos: string): string {
   const titles: Record<string, string> = {
     "11A": "Infantry Officer Candidate",
-    "11B": "Special Forces Candidate",
+    "11B": "Direct Action Candidate",
     "11C": "Indirect Fire Infantryman Trainee",
     "68W": "Combat Medic Trainee",
     "25U": "Signal Support Trainee",
     "13F": "Fire Support Specialist Trainee",
   };
-  return titles[mos] || "Special Forces Candidate";
+  return titles[mos] || "LIONHEART Candidate";
 }
 
 export async function denyApplication(id: string, notes?: string) {

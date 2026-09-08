@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/app/lib/supabase/server";
 import { Clock, CheckCircle, XCircle, LogIn } from "lucide-react";
@@ -91,8 +90,7 @@ export default async function EnlistPage() {
     .from("soldiers")
     .select("id, role, mos, mos_title, team, unit")
     .eq("status", "VACANT")
-    .eq("unit", "20th Special Forces Group")
-    .eq("team", "ODA 2011")
+    .eq("unit", "Interagency Special Missions Group")
     .not("role", "ilike", "%leader%")
     .not("role", "ilike", "%sergeant%")
     .not("role", "ilike", "%commander%")

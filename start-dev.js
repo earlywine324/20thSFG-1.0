@@ -6,4 +6,5 @@ const port = process.env.PORT;
 if (port && !process.argv.includes('--port')) {
   process.argv.push('--port', port);
 }
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('C:\\Users\\gvear\\20th-sfg\\node_modules\\next\\dist\\bin\\next');

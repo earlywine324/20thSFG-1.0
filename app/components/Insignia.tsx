@@ -6,7 +6,6 @@
 
 export function RankInsignia({ rank, size = 48 }: { rank: string; size?: number }) {
   const s = size;
-  const mid = s / 2;
 
   switch (rank) {
     // ── Enlisted ──
@@ -263,13 +262,12 @@ export function AwardRibbon({ name, size = 48 }: { name: string; size?: number }
 
   const totalWeight = colors.reduce((sum, [, w]) => sum + parseInt(w), 0);
 
-  let x = 2;
   const ribbonWidth = 44;
   const stripes = colors.map(([color, weight], i) => {
     const w = (parseInt(weight) / totalWeight) * ribbonWidth;
-    const stripe = <rect key={i} x={x} y="2" width={w} height="20" fill={color} />;
-    x += w;
-    return stripe;
+    const precedingWeight = colors.slice(0, i).reduce((sum, [, value]) => sum + parseInt(value), 0);
+    const x = 2 + (precedingWeight / totalWeight) * ribbonWidth;
+    return <rect key={i} x={x} y="2" width={w} height="20" fill={color} />;
   });
 
   return (
@@ -297,7 +295,7 @@ export function QualBadge({ abbr, size = 48 }: { abbr: string; size?: number }) 
       return (
         <svg width={size * 1.4} height={size * 0.6} viewBox="0 0 68 28" fill="none">
           <rect x="1" y="2" width="66" height="24" rx="4" fill="#006400" stroke="#c9a128" strokeWidth="1.5" />
-          <text x="34" y="19" textAnchor="middle" fill="#c9a128" fontSize="11" fontWeight="900" letterSpacing="2">SPECIAL FORCES</text>
+          <text x="34" y="19" textAnchor="middle" fill="#c9a128" fontSize="11" fontWeight="900" letterSpacing="2">LIONHEART</text>
         </svg>
       );
     case "Sapper Tab":

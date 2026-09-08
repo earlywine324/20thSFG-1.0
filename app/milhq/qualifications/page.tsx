@@ -16,11 +16,11 @@ const QUALIFICATIONS: { section: string; subtitle: string; items: Qualification[
     subtitle: "Shoulder Tabs & Unit Identifiers",
     items: [
       {
-        name: "Special Forces Tab",
+        name: "LIONHEART Operator Tab",
         abbr: "SF Tab",
         image: "/insignia/quals/Special-Forces-Tab-69c21fa3c81dc.png",
         category: "tab",
-        description: "The Special Forces Tab identifies operators who have completed the unit qualification course and demonstrated proficiency across ODA mission sets.",
+        description: "The LIONHEART Operator Tab identifies personnel who have completed program qualification and demonstrated proficiency across the interagency mission set.",
         requirements: ["Complete selection", "Complete the unit qualification course", "Pass all field evaluations", "Meet peer evaluation standards", "Detachment leadership endorsement"],
       },
       {
@@ -185,7 +185,7 @@ export default function QualificationsPage() {
           </div>
           <h1 className="text-5xl font-black mb-4" style={{ color: "#e8e4d8" }}>Qualifications</h1>
           <p className="max-w-xl leading-relaxed" style={{ color: "#8a8870" }}>
-            Badges, tabs, and skill qualifications authorized by ODA 2011, 20th SFG. Operators earn these through completing training courses, operational experience, and demonstrating proficiency.
+            Badges, tabs, and skill qualifications authorized by the LIONHEART Program. Members earn these through training, operational experience, and demonstrated proficiency.
           </p>
         </div>
       </section>

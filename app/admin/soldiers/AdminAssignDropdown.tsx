@@ -236,7 +236,7 @@ export default function AdminAssignDropdown({
             ) : (
               filtered.map((s) => {
                 const isLoading = loading === s.id;
-                const isRasp = s.unit === "Selection Pipeline";
+                const isRasp = s.unit === "LIONHEART Selection";
                 return (
                   <button
                     key={s.id}
@@ -270,7 +270,7 @@ export default function AdminAssignDropdown({
                         )}
                       </p>
                       <p className="text-[9px] truncate" style={{ color: isRasp ? "#f59e0b" : "#4a4838" }}>
-                        {isRasp ? "⬡ Selection Pipeline" : s.unit}
+                        {isRasp ? "⬡ LIONHEART Selection" : s.unit}
                       </p>
                     </div>
 
