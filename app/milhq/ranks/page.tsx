@@ -1,227 +1,362 @@
 import Image from "next/image";
-import { Shield } from "lucide-react";
+import {
+  ArrowDown,
+  BadgeCheck,
+  Crosshair,
+  Eye,
+  FlaskConical,
+  Gavel,
+  Network,
+  Shield,
+  Star,
+  Users,
+} from "lucide-react";
 
-/* ─── RANK DATA ─── */
-
-type Rank = {
-  grade: string;
-  abbr: string;
+type Grade = {
+  code: string;
   title: string;
-  image: string;
+  label: string;
   description: string;
-  requirements: string[];
 };
 
-const ENLISTED: Rank[] = [
+const COMMAND_GRADES: Grade[] = [
   {
-    grade: "E-1", abbr: "PVT", title: "Private", image: "/insignia/ranks/E1-PVT-69a12d80c6a4e.png",
-    description: "Entry-level grade for candidates entering LIONHEART screening. Candidates focus on communications, tactical fundamentals, and the standards required for an operational assignment.",
-    requirements: ["Complete program application", "Pass initial screening", "Begin candidate training"],
+    code: "LH-9",
+    title: "Director",
+    label: "Executive Command",
+    description:
+      "Commands ISMG, sets policy and strategic priorities, and holds final organizational authority.",
   },
   {
-    grade: "E-2", abbr: "PV2", title: "Private Second Class", image: "/insignia/ranks/E2-PV2-6999ba19e286b.png",
-    description: "Awarded after successful completion of screening. New members begin proving themselves within an operational element and focus on mastering individual skills.",
-    requirements: ["Complete selection", "Minimum 30 days time in service", "Squad leader recommendation"],
+    code: "LH-8",
+    title: "Deputy Director",
+    label: "Executive Command",
+    description:
+      "Coordinates the four divisions, assumes command when required, and converts strategy into executable plans.",
   },
   {
-    grade: "E-3", abbr: "PFC", title: "Private First Class", image: "/insignia/ranks/E3-PFC-69b67ad12756e.png",
-    description: "An experienced junior operator who contributes reliably to element missions, assists newer members, and continues developing individual skills.",
-    requirements: ["Minimum 60 days as PV2", "Demonstrated MOS proficiency", "Participation in at least 2 FTX operations"],
-  },
-  {
-    grade: "E-4", abbr: "SPC", title: "Specialist", image: "/insignia/ranks/E4-SPC-69b67ad8ccce6.png",
-    description: "A qualified operator and subject-matter specialist. Specialists execute LIONHEART missions with skill, judgment, and consistent reliability.",
-    requirements: ["Minimum 90 days as PFC", "MOS qualification complete", "Minimum 4 FTX operations attended", "Team leader recommendation"],
-  },
-  {
-    grade: "E-4", abbr: "CPL", title: "Corporal", image: "/insignia/ranks/E4X-CPL-69b67ae206ef4.png",
-    description: "The first NCO rank in the unit. Corporals lead a buddy team and hold direct authority over junior enlisted Operators. They are responsible for the training, welfare, and discipline of their soldiers during operations.",
-    requirements: ["Current SPC or equivalent", "Demonstrated element leadership", "Team lead recommendation", "Leadership evaluation board"],
+    code: "LH-7",
+    title: "Chief of Operations",
+    label: "Operational Command",
+    description:
+      "Controls the operational cycle, approves mission packages, and enforces training and readiness standards.",
   },
 ];
 
-const NCO: Rank[] = [
+const OPERATIONAL_GRADES: Grade[] = [
   {
-    grade: "E-5", abbr: "SGT", title: "Sergeant", image: "/insignia/ranks/E5-SGT-6999b9cc6474e.png",
-    description: "A team leader responsible for a small operational cell. Sergeants make immediate tactical decisions and connect element leadership with individual operators.",
-    requirements: ["Minimum 90 days as CPL", "Demonstrated team leadership", "Minimum 6 operations attended", "Passed leadership evaluation"],
+    code: "LH-6",
+    title: "Division Chief",
+    label: "Division Command",
+    description: "Owns personnel, readiness, doctrine, and performance for one operational division.",
   },
   {
-    grade: "E-6", abbr: "SSG", title: "Staff Sergeant", image: "/insignia/ranks/E6-SSG-6999b9b952f93.png",
-    description: "An experienced operational team leader who plans missions, develops personnel, and leads tactical execution across LIONHEART assignments.",
-    requirements: ["Minimum 120 days as SGT", "Operator Tab earned", "Demonstrated team leadership", "Minimum 10 operations attended", "Operations Sergeant recommendation"],
+    code: "LH-5",
+    title: "Detachment Commander",
+    label: "Detachment Command",
+    description: "Leads a six-person detachment from mission planning through execution and debrief.",
   },
   {
-    grade: "E-7", abbr: "SFC", title: "Sergeant First Class", image: "/insignia/ranks/E7-SFC-6999b9a7c5144.png",
-    description: "A senior operations leader responsible for element readiness, training standards, personnel development, and mission execution.",
-    requirements: ["Minimum 180 days as SSG", "Successful tour as Team Leader", "Operator Tab and Airborne qualification", "Detachment Commander recommendation"],
+    code: "LH-4",
+    title: "Detachment Deputy",
+    label: "Detachment Leadership",
+    description: "Assists the commander, manages readiness, and supervises split or supporting elements.",
   },
   {
-    grade: "E-8", abbr: "MSG", title: "Master Sergeant", image: "/insignia/ranks/E8-MSG-6999b983e4705.png",
-    description: "A senior NCO serving in a group-level staff or senior advisor role. Master Sergeants provide experienced guidance on operations, training, and personnel. In the unit, MSG billets exist at battalion staff and serve as senior technical experts.",
-    requirements: ["Minimum 240 days as SFC", "Proven record as Operations Sergeant", "Leadership evaluation board", "Battalion commander recommendation"],
+    code: "LH-3",
+    title: "Senior Officer",
+    label: "Senior Qualified",
+    description: "An experienced agent or operator who leads a specialty and mentors developing personnel.",
   },
   {
-    grade: "E-8", abbr: "1SG", title: "Operations Sergeant", image: "/insignia/ranks/E8X-1SG-6999b918e1887.png",
-    description: "The senior enlisted leader and principal advisor to program command on personnel, standards, readiness, and operational discipline.",
-    requirements: ["Minimum 240 days as SFC", "Proven record as Operations Sergeant", "Selected over MSG by detachment commander", "Battalion commander approval"],
+    code: "LH-2",
+    title: "Officer",
+    label: "Mission Qualified",
+    description: "A fully qualified member trusted to execute division-specific responsibilities independently.",
   },
   {
-    grade: "E-9", abbr: "SGM", title: "Sergeant Major", image: "/insignia/ranks/E9-SGM-6999b8ff8e0f4.png",
-    description: "A senior enlisted advisor at the battalion level. Sergeant Majors in the unit advise the group commander on all enlisted matters, discipline, training standards, and unit readiness. They set the standard for Operator professionalism across the group.",
-    requirements: ["Minimum 300 days as MSG", "Exceptional service record", "Senior leadership board selection", "Battalion commander recommendation"],
-  },
-  {
-    grade: "E-9", abbr: "CSM", title: "Command Sergeant Major", image: "/insignia/ranks/E9X-CSM-6999b8e3d9ec0.png",
-    description: "The senior enlisted leader of the unit, serving as the principal advisor to the commanding officer on all matters affecting enlisted Operators. The CSM sets the tone for culture, discipline, and standards throughout the unit. This is the highest enlisted rank in the unit.",
-    requirements: ["Current SGM", "Exemplary leadership record", "Selected by the Commanding Officer", "Minimum 1 year total time in service"],
-  },
-];
-
-const OFFICER: Rank[] = [
-  {
-    grade: "O-1", abbr: "2LT", title: "Second Lieutenant", image: "/insignia/ranks/O1-2LT-6999b57050da7.png",
-    description: "An entry-level commissioned officer learning the fundamentals of Operator leadership. Second Lieutenants may serve as assistant detachment commanders or in training billets, gaining the tactical foundation required to lead Operators in combat.",
-    requirements: ["Officer candidate program completion", "Infantry Officer Basic Course equivalent", "Operator Assessment complete"],
-  },
-  {
-    grade: "O-2", abbr: "1LT", title: "First Lieutenant", image: "/insignia/ranks/O2-1LT-6999b55b25615.png",
-    description: "An element commander responsible for planning, leading, and accounting for assigned personnel while working directly with senior operations staff.",
-    requirements: ["Minimum 180 days as 2LT or direct appointment", "Operator Tab", "Demonstrated platoon-level leadership", "Detachment Commander selection"],
-  },
-  {
-    grade: "O-3", abbr: "CPT", title: "Captain", image: "/insignia/ranks/O3-CPT-6999b54675e25.png",
-    description: "A division or squadron commander responsible for readiness, training, discipline, and operational performance within LIONHEART.",
-    requirements: ["Minimum 240 days as 1LT", "Successful platoon command tour", "Operator Tab and Airborne qualification", "Battalion commander selection"],
-  },
-  {
-    grade: "O-4", abbr: "MAJ", title: "Major", image: "/insignia/ranks/O4-MAJ-6999b5341b384.png",
-    description: "A field-grade officer serving as the Battalion Executive Officer (XO) or operations officer (S3). Majors coordinate operations across the group, manage planning cycles, and advise the group commander. They have proven themselves in multiple company-level assignments.",
-    requirements: ["Minimum 300 days as CPT", "Successful company command", "Senior leader course equivalent", "Battalion commander recommendation"],
-  },
-  {
-    grade: "O-5", abbr: "LTC", title: "Lieutenant Colonel", image: "/insignia/ranks/O5-LTC-6999b470e637c.png",
-    description: "The LIONHEART Program Director, holding overall responsibility for training, readiness, personnel, and operations across ISMG.",
-    requirements: ["Minimum 360 days as MAJ", "Battalion-level staff and command experience", "Regimental commander recommendation"],
-  },
-  {
-    grade: "O-6", abbr: "COL", title: "Colonel", image: "/insignia/ranks/O6-COL-6999b3e5dc0ae.png",
-    description: "A senior group commander with responsibility for readiness, training, personnel, and operations across the organization.",
-    requirements: ["Minimum 360 days as LTC", "Proven command at battalion level", "Selected by unit leadership council"],
+    code: "LH-1",
+    title: "Candidate",
+    label: "Assessment Pipeline",
+    description: "A member completing screening, orientation, and foundational division training.",
   },
 ];
 
-/* ─── RANK CARD ─── */
-function RankCard({ rank }: { rank: Rank }) {
+const DIVISIONS = [
+  {
+    key: "SAD",
+    name: "Special Activities Division",
+    icon: Eye,
+    color: "#c9a65a",
+    titles: [
+      "Division Chief",
+      "Detachment Chief",
+      "Team Chief",
+      "Senior Case Officer",
+      "Operations Officer",
+      "Operations Candidate",
+    ],
+  },
+  {
+    key: "FOD",
+    name: "Federal Operations Division",
+    icon: Gavel,
+    color: "#879eaa",
+    titles: [
+      "Special Agent in Charge",
+      "Assistant Special Agent in Charge",
+      "Supervisory Special Agent",
+      "Senior Special Agent",
+      "Special Agent",
+      "New Agent",
+    ],
+  },
+  {
+    key: "NOD",
+    name: "Narcotics Operations Division",
+    icon: FlaskConical,
+    color: "#8e9f78",
+    titles: [
+      "Special Agent in Charge",
+      "Assistant Special Agent in Charge",
+      "Group Supervisor",
+      "Senior Special Agent",
+      "Special Agent",
+      "Agent Trainee",
+    ],
+  },
+  {
+    key: "SMS",
+    name: "Special Missions Squadron",
+    icon: Crosshair,
+    color: "#a98578",
+    titles: [
+      "Squadron Commander",
+      "Detachment Commander",
+      "Assistant Detachment Commander",
+      "Team Leader",
+      "Operator",
+      "Selection Candidate",
+    ],
+  },
+];
+
+const DETACHMENT = [
+  ["01", "LH-5", "Detachment Commander", "Mission authority"],
+  ["02", "LH-4", "Detachment Deputy", "Readiness and second-in-command"],
+  ["03", "LH-3", "Senior Specialist", "Lead discipline and mentorship"],
+  ["04", "LH-2", "Specialist", "Primary mission function"],
+  ["05", "LH-2", "Specialist", "Primary mission function"],
+  ["06", "LH-1", "Candidate / Attached Specialist", "Development or mission augmentation"],
+];
+
+function GradeMark({ code, large = false }: { code: string; large?: boolean }) {
+  const level = Number(code.split("-")[1]);
+  const marks = level > 6 ? level - 6 : Math.max(1, Math.ceil(level / 2));
+
   return (
-    <div className="bg-[#0f120a] border border-[#1c2014] rounded-lg overflow-hidden hover:border-[#252a1c] transition-colors">
-      <div className="flex items-start gap-5 p-5">
-        {/* Insignia */}
-        <div className="w-16 h-16 rounded-lg flex items-center justify-center shrink-0 overflow-hidden" style={{
-          backgroundColor: "rgba(77,182,224,0.06)",
-          border: "1px solid rgba(77,182,224,0.15)",
-        }}>
-          <Image src={rank.image} alt={rank.title} width={48} height={48} className="object-contain" />
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-baseline gap-2 mb-1">
-            <span className="text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded" style={{
-              color: "#4db6e0", backgroundColor: "rgba(77,182,224,0.1)",
-            }}>{rank.grade}</span>
-            <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#8a8870" }}>{rank.abbr}</span>
-          </div>
-          <h3 className="text-base font-black mb-2" style={{ color: "#e8e4d8" }}>{rank.title}</h3>
-          <p className="text-xs leading-relaxed mb-3" style={{ color: "#8a8870" }}>{rank.description}</p>
-
-          {/* Requirements */}
-          <div>
-            <p className="text-[10px] font-black tracking-widest uppercase mb-1.5" style={{ color: "#6b6a58" }}>Requirements</p>
-            <ul className="space-y-1">
-              {rank.requirements.map((req, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs" style={{ color: "#6b6a58" }}>
-                  <span className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: "#4db6e0" }} />
-                  {req}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+    <div
+      className={`relative flex ${large ? "h-20 w-20" : "h-14 w-14"} shrink-0 items-center justify-center rounded-full border border-[#c9a65a]/40 bg-[#c9a65a]/[0.06]`}
+    >
+      <Shield className={`${large ? "h-10 w-10" : "h-7 w-7"} text-[#c9a65a]`} strokeWidth={1.25} />
+      <div className="absolute -bottom-1 flex gap-1">
+        {Array.from({ length: marks }).map((_, index) => (
+          <span key={index} className="h-1 w-1 rounded-full bg-[#c9a65a]" />
+        ))}
       </div>
     </div>
   );
 }
 
-/* ─── SECTION ─── */
-function RankSection({ title, subtitle, ranks }: { title: string; subtitle: string; ranks: Rank[] }) {
+function GradeCard({ grade, command = false }: { grade: Grade; command?: boolean }) {
   return (
-    <section className="py-12 px-6 border-t border-[#1c2014]">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-1 h-10 rounded-full" style={{ backgroundColor: "#4db6e0" }} />
-          <div>
-            <p className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#4db6e0" }}>{subtitle}</p>
-            <h2 className="text-xl font-black" style={{ color: "#e8e4d8" }}>{title}</h2>
-          </div>
-          <div className="h-px flex-1" style={{ backgroundColor: "#1c2014" }} />
-          <span className="text-sm font-black" style={{ color: "#8a8870" }}>{ranks.length}</span>
-        </div>
-        <div className="space-y-4">
-          {ranks.map((r) => <RankCard key={r.abbr + r.grade} rank={r} />)}
-        </div>
+    <article className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0f10]/90 p-6 transition duration-300 hover:-translate-y-1 hover:border-[#c9a65a]/40">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c9a65a]/60 to-transparent opacity-0 transition group-hover:opacity-100" />
+      <div className="mb-7 flex items-start justify-between gap-4">
+        <GradeMark code={grade.code} large={command} />
+        <span className="rounded-full border border-[#c9a65a]/20 bg-[#c9a65a]/[0.06] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a65a]">
+          {grade.code}
+        </span>
       </div>
-    </section>
+      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#77766f]">{grade.label}</p>
+      <h3 className={`${command ? "text-2xl" : "text-xl"} mb-3 font-semibold tracking-tight text-[#f1ede3]`}>
+        {grade.title}
+      </h3>
+      <p className="text-sm leading-6 text-[#92918a]">{grade.description}</p>
+    </article>
   );
 }
 
-/* ─── PAGE ─── */
+function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
+  return (
+    <div className="mb-9 grid gap-4 md:grid-cols-[1fr_1fr] md:items-end">
+      <div>
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.32em] text-[#c9a65a]">{eyebrow}</p>
+        <h2 className="text-3xl font-semibold tracking-tight text-[#f1ede3] md:text-4xl">{title}</h2>
+      </div>
+      <p className="max-w-xl text-sm leading-6 text-[#85847e] md:justify-self-end">{copy}</p>
+    </div>
+  );
+}
+
 export default function RanksPage() {
   return (
-    <div className="bg-[#090b07] text-[#e8e4d8]">
-      {/* Header */}
-      <section className="relative py-20 px-6 overflow-hidden bg-black-mc grain" style={{ borderBottom: "1px solid #1c2014" }}>
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: "linear-gradient(#4db6e0 1px, transparent 1px), linear-gradient(90deg, #4db6e0 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }} />
-        <div className="relative max-w-5xl mx-auto">
-          <div className="flex items-center gap-2 mb-4">
-            <Shield className="w-4 h-4" style={{ color: "#4db6e0" }} />
-            <p className="text-[10px] font-black tracking-[0.35em] uppercase" style={{ color: "#4db6e0" }}>Military Headquarters</p>
-          </div>
-          <h1 className="text-5xl font-black mb-4" style={{ color: "#e8e4d8" }}>Rank Structure</h1>
-          <p className="max-w-xl leading-relaxed" style={{ color: "#8a8870" }}>
-            Complete grade structure for the LIONHEART Program. Military-style grades are adapted for leadership and progression within our Arma realism unit.
-          </p>
+    <main className="min-h-screen bg-[#070809] text-[#f1ede3]">
+      <section className="relative isolate overflow-hidden border-b border-white/[0.07] px-6 py-20 md:py-28">
+        <Image
+          src="/lionheart-hero.webp"
+          alt=""
+          fill
+          priority
+          className="-z-20 object-cover object-center opacity-20 grayscale"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#070809] via-[#070809]/95 to-[#070809]/60" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.025)_1px,transparent_1px)] bg-[size:48px_48px]" />
 
-          {/* Key billets callout */}
-          <div className="flex flex-wrap gap-3 mt-8">
-            {[
-              { billet: "Detachment Commander", rank: "CPT" },
-              { billet: "senior enlisted leader", rank: "1SG" },
-              { billet: "Detachment Commander", rank: "1LT" },
-              { billet: "Operations Sergeant", rank: "SFC" },
-              { billet: "Team Leader", rank: "SSG" },
-              { billet: "Fire Team Leader", rank: "SGT" },
-              { billet: "Operator", rank: "SPC/CPL" },
-            ].map(({ billet, rank }) => (
-              <div key={billet} className="flex items-center gap-2 px-4 py-2 rounded-lg" style={{
-                backgroundColor: "rgba(77,182,224,0.06)",
-                border: "1px solid rgba(77,182,224,0.15)",
-              }}>
-                <span className="text-[10px] font-black tracking-wider uppercase" style={{ color: "#4db6e0" }}>{rank}</span>
-                <span className="text-[10px]" style={{ color: "#505870" }}>—</span>
-                <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: "#8a8870" }}>{billet}</span>
-              </div>
-            ))}
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 flex items-center gap-4">
+            <div className="relative h-16 w-16 overflow-hidden rounded-full border border-[#c9a65a]/30 bg-black/40">
+              <Image src="/lionheart-emblem.webp" alt="Lionheart seal" fill className="object-contain p-1" />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c9a65a]">Personnel Directive // 01</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#77766f]">Interagency Special Missions Group</p>
+            </div>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-[1.35fr_.65fr] lg:items-end">
+            <div>
+              <h1 className="max-w-3xl text-5xl font-semibold leading-[0.95] tracking-[-0.045em] md:text-7xl">
+                Grade <span className="text-[#c9a65a]">&amp;</span> Authority
+              </h1>
+              <p className="mt-7 max-w-2xl text-base leading-7 text-[#aaa79e]">
+                One unified Lionheart grade establishes authority across ISMG. Each division applies its own professional title without changing the chain of command.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 lg:grid-cols-1">
+              {[["09", "Unified grades"], ["04", "Division ladders"], ["06", "Person detachments"]].map(([number, label]) => (
+                <div key={label} className="border-l border-[#c9a65a]/30 py-2 pl-4">
+                  <p className="text-xl font-semibold text-[#f1ede3]">{number}</p>
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-[#77766f]">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <RankSection title="Enlisted Ranks" subtitle="E-1 through E-4 · Junior Operators" ranks={ENLISTED} />
-      <RankSection title="Non-Commissioned Officers" subtitle="E-5 through E-9 · Operator Leadership" ranks={NCO} />
-      <RankSection title="Commissioned Officers" subtitle="O-1 through O-6 · Officer Corps" ranks={OFFICER} />
-    </div>
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading
+            eyebrow="Strategic authority"
+            title="Command Group"
+            copy="The command group sets policy, synchronizes the divisions, and maintains final authority over the operational cycle."
+          />
+          <div className="grid gap-4 md:grid-cols-3">
+            {COMMAND_GRADES.map((grade) => <GradeCard key={grade.code} grade={grade} command />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/[0.07] bg-[#0a0b0c] px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading
+            eyebrow="Operational authority"
+            title="Division & Detachment Grades"
+            copy="LH-6 through LH-1 defines the working chain of command used inside every Lionheart division and deployed detachment."
+          />
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {OPERATIONAL_GRADES.map((grade) => <GradeCard key={grade.code} grade={grade} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading
+            eyebrow="Division equivalency"
+            title="One Grade. Four Professions."
+            copy="Members display the common LH grade first, followed by the title used within their assigned division."
+          />
+
+          <div className="overflow-x-auto rounded-2xl border border-white/[0.08] bg-[#0b0d0e]">
+            <div className="min-w-[980px]">
+              <div className="grid grid-cols-[90px_repeat(4,1fr)] border-b border-white/[0.08] bg-white/[0.02]">
+                <div className="p-5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#66655f]">Grade</div>
+                {DIVISIONS.map((division) => {
+                  const Icon = division.icon;
+                  return (
+                    <div key={division.key} className="border-l border-white/[0.06] p-5">
+                      <div className="mb-3 flex items-center gap-2" style={{ color: division.color }}>
+                        <Icon className="h-4 w-4" />
+                        <span className="text-xs font-bold tracking-[0.18em]">{division.key}</span>
+                      </div>
+                      <p className="text-xs leading-5 text-[#8f8e87]">{division.name}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {OPERATIONAL_GRADES.map((grade, row) => (
+                <div key={grade.code} className="grid grid-cols-[90px_repeat(4,1fr)] border-b border-white/[0.06] last:border-b-0">
+                  <div className="flex items-center p-5 text-sm font-semibold text-[#c9a65a]">{grade.code}</div>
+                  {DIVISIONS.map((division) => (
+                    <div key={division.key} className="flex items-center border-l border-white/[0.06] p-5 text-sm leading-5 text-[#d2cfc6]">
+                      {division.titles[row]}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-5 flex items-start gap-3 rounded-xl border border-[#c9a65a]/15 bg-[#c9a65a]/[0.04] p-4 text-xs leading-5 text-[#96948d]">
+            <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a65a]" />
+            <p><span className="font-semibold text-[#d9d5ca]">Display example:</span> LH-3 · Senior Case Officer · Special Activities Division</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/[0.07] bg-[#0a0b0c] px-6 py-20">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.8fr_1.2fr]">
+          <div>
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.32em] text-[#c9a65a]">Deployable element</p>
+            <h2 className="text-4xl font-semibold tracking-tight text-[#f1ede3]">Six-Person Detachment</h2>
+            <p className="mt-5 text-sm leading-6 text-[#85847e]">
+              Every division uses the same compact command model. The leadership seats remain fixed while the specialist billets change with the mission.
+            </p>
+            <div className="mt-8 rounded-2xl border border-[#c9a65a]/20 bg-[#c9a65a]/[0.04] p-6">
+              <Network className="mb-5 h-6 w-6 text-[#c9a65a]" />
+              <p className="text-lg font-semibold text-[#e8e3d7]">Command stays fixed.</p>
+              <p className="text-lg text-[#9b998f]">Specialties change.</p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute bottom-6 left-[23px] top-6 w-px bg-gradient-to-b from-[#c9a65a]/60 via-[#c9a65a]/20 to-transparent" />
+            <div className="space-y-3">
+              {DETACHMENT.map(([position, grade, title, description], index) => (
+                <div key={position} className="relative grid grid-cols-[48px_64px_1fr] items-center gap-3 rounded-xl border border-white/[0.07] bg-[#0d0f10] p-4">
+                  <div className="z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[#c9a65a]/30 bg-[#0d0f10] text-[10px] font-bold text-[#c9a65a]">{position}</div>
+                  <span className="text-xs font-semibold text-[#c9a65a]">{grade}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-[#e5e1d7]">{title}</p>
+                    <p className="mt-1 text-xs text-[#77766f]">{description}</p>
+                  </div>
+                  {index < DETACHMENT.length - 1 && <ArrowDown className="absolute -bottom-3 left-[15px] z-20 h-3 w-3 text-[#c9a65a]/50" />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-white/[0.07] px-6 py-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 text-[9px] uppercase tracking-[0.22em] text-[#5f5e59]">
+          <span className="flex items-center gap-2"><Star className="h-3 w-3 text-[#c9a65a]" /> LIONHEART Personnel System</span>
+          <span className="flex items-center gap-2"><Users className="h-3 w-3" /> Fictional organization // Internal use</span>
+        </div>
+      </footer>
+    </main>
   );
 }
